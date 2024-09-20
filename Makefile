@@ -379,7 +379,6 @@ clean:
 # Per-file flag definitions
 build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O3
-build/$(VERSION)/src/core1/os/kdebugserver.c.o: OPT_FLAGS = -O2
 build/$(VERSION)/src/core1/gu/%.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/core1/gu/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
 build/$(VERSION)/src/core1/audio/%.c.o: OPT_FLAGS = -O3
@@ -389,8 +388,11 @@ build/$(VERSION)/src/core1/ll.c.o: MIPSBIT := -mips3 -o32
 build/$(VERSION)/src/core1/ll_cvt.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/core1/ll_cvt.c.o: MIPSBIT := -mips3 -o32
 
-
 build/$(VERSION)/src/done/kdebugserver.c.o: OPT_FLAGS = -O2
+# all bss_pad.c files need ot be compiled with -O2
+build/$(VERSION)/src/%/bss_pad.c.o: OPT_FLAGS = -O2
+
+build/$(VERSION)/src/core1/os/kdebugserver.c.o: OPT_FLAGS = -O2
 build/$(VERSION)/src/bk_boot_27F0.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/done/destroythread.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/pirawdma.c.o: OPT_FLAGS := -O3
@@ -425,6 +427,17 @@ build/$(VERSION)/src/done/cartrominit.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/leointerrupt.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/epirawdma.c.o: OPT_FLAGS := -O3
 
+
+build/$(VERSION)/src/core1/code_3250.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/core2/code_33310.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/core2/code_336F0.c.o: 	OPT_FLAGS := -O2
+build/$(VERSION)/src/SM/code_46C0.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/done/bk_boot_1050.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/emptyLvl/code_0.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/fight/code_0.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/emptyLvl/code_0.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/done/bk_boot_1050.c.o: OPT_FLAGS := -O2  
+build/$(VERSION)/src/SM/code_46C0.c.o: OPT_FLAGS := -O2
 # Disable implicit rules
 MAKEFLAGS += -r
 
