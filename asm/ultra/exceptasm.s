@@ -243,8 +243,7 @@ cart:
 /* 30EC 800024EC 3C018000 */  lui        $at, %hi(__osHwIntTable)
 /* 30F0 800024F0 002A0821 */  addu       $at, $at, $t2
 /* 30F4 800024F4 8C2A5100 */  lw         $t2, %lo(__osHwIntTable)($at)
-/* 30F8 800024F8 3C1D8000 */  lui        $sp, %hi(leoDiskStack)
-/* 30FC 800024FC 27BD7470 */  addiu      $sp, $sp, %lo(leoDiskStack)
+
 /* 3100 80002500 24040010 */  addiu      $a0, $zero, 0x10
 /* 3104 80002504 11400007 */  beqz       $t2, .L80002524
 /* 3108 80002508 27BD0FF0 */   addiu     $sp, $sp, 0xff0

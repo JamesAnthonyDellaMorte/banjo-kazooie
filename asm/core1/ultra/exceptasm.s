@@ -241,8 +241,7 @@ cart:
 /* F45D9C 8026A56C 3C018027 */  lui        $at, %hi(__osHwIntTable)
 /* F45DA0 8026A570 002A0821 */  addu       $at, $at, $t2
 /* F45DA4 8026A574 8C2A7350 */  lw         $t2, %lo(__osHwIntTable)($at)
-/* F45DA8 8026A578 3C1D8028 */  lui        $sp, %hi(leoDiskStack)
-/* F45DAC 8026A57C 27BD5F90 */  addiu      $sp, $sp, %lo(leoDiskStack)
+
 /* F45DB0 8026A580 24040010 */  addiu      $a0, $zero, 0x10
 /* F45DB4 8026A584 11400007 */  beqz       $t2, .L8026A5A4
 /* F45DB8 8026A588 27BD0FF0 */   addiu     $sp, $sp, 0xFF0

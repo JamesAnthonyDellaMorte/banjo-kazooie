@@ -377,8 +377,9 @@ clean:
 	@$(RM) -f *.ld
 
 # Per-file flag definitions
-build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O2
-build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O2
+build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O3
+build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O3
+build/$(VERSION)/src/core1/os/kdebugserver.c.o: OPT_FLAGS = -O2
 build/$(VERSION)/src/core1/gu/%.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/core1/gu/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
 build/$(VERSION)/src/core1/audio/%.c.o: OPT_FLAGS = -O3
@@ -388,6 +389,8 @@ build/$(VERSION)/src/core1/ll.c.o: MIPSBIT := -mips3 -o32
 build/$(VERSION)/src/core1/ll_cvt.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/core1/ll_cvt.c.o: MIPSBIT := -mips3 -o32
 
+
+build/$(VERSION)/src/done/kdebugserver.c.o: OPT_FLAGS = -O2
 build/$(VERSION)/src/bk_boot_27F0.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/done/destroythread.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/pirawdma.c.o: OPT_FLAGS := -O3
@@ -419,7 +422,7 @@ build/$(VERSION)/src/done/pirawread.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/seteventmesg.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/siacs.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/cartrominit.c.o: OPT_FLAGS := -O3
-build/$(VERSION)/src/done/leointerrupt.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/done/leointerrupt.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/epirawdma.c.o: OPT_FLAGS := -O3
 
 # Disable implicit rules

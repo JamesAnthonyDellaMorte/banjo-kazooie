@@ -14,7 +14,7 @@ extern OSThread *__osRunQueue;
 extern OSIntMask __OSGlobalIntMask;
 extern OSPiHandle *__osDiskHandle;
 
-u8 leoDiskStack[OS_PIM_STACKSIZE];
+
 s32 __osLeoInterrupt()
 {
 	u32 stat;
