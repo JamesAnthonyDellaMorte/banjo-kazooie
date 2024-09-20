@@ -41,11 +41,11 @@ PYTHON  := python3
 GREP    := grep -rl
 SPLAT   := $(PYTHON) tools/n64splat/split.py
 PRINT   := printf
-ASM_PROCESSOR_DIR := tools/asm-processor
+#ASM_PROCESSOR_DIR := tools/asm-processor
 BK_ROM_COMPRESS   := tools/bk_rom_compressor/target/release/bk_rom_compress
 BK_ROM_DECOMPRESS := tools/bk_rom_compressor/target/release/bk_rom_decompress
 BK_ASSET_TOOL     := tools/bk_asset_tool/target/release/bk_asset_tool
-ASM_PROCESSOR     := $(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py
+#ASM_PROCESSOR     := $(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py
 SPLAT_INPUTS      := $(PYTHON) tools/splat_inputs.py
 PROGRESS          := $(PYTHON) tools/progress.py
 PROGRESS_READ     := $(PYTHON) tools/progress_read.py
@@ -162,7 +162,7 @@ CFLAGS         := -c -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm $(OPT_FLAGS) $
 CFLAGS         += -woff 649,654,838,807
 CPPFLAGS       := -D_FINALROM -DN_MICRO
 INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR
-OPT_FLAGS      := -O2 
+OPT_FLAGS      := -O2
 MIPSBIT        := -mips2
 ASFLAGS        := -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 GCC_ASFLAGS    := -c -x assembler-with-cpp -mabi=32 -ffreestanding -mtune=vr4300 -march=vr4300 -mfix4300 -G 0 -O -mno-shared -fno-PIC -mno-abicalls
@@ -255,13 +255,12 @@ $(MIPS3_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	@$(CC) -c -32 $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $<
 	@tools/set_o32abi_bit.py $@
 
-# .c -> .o with asm processor
-$(GLOBAL_ASM_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling (with ASM Processor):,$<,$@)
-	@$(ASM_PROCESSOR) $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
-	@$(CC) -32 $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
-	@$(ASM_PROCESSOR) $(OPT_FLAGS) $< --post-process $@ \
-		--assembler "$(AS) $(ASFLAGS)" --asm-prelude include/prelude.s
+
+# .c -> .o (normal compilation without asm_processor)
+$(BUILD_DIR)/%.c.o: %.c | $(C_BUILD_DIRS)
+	$(call print2,Compiling:,$<,$@)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
+
 
 # .c -> .o (boot)
 $(BOOT_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
@@ -378,50 +377,50 @@ clean:
 	@$(RM) -f *.ld
 
 # Per-file flag definitions
-build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O1
-build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O1
+build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O2
+build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O2
 build/$(VERSION)/src/core1/gu/%.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/core1/gu/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
 build/$(VERSION)/src/core1/audio/%.c.o: OPT_FLAGS = -O3
 build/$(VERSION)/src/core1/audio/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
-build/$(VERSION)/src/core1/ll.c.o: OPT_FLAGS := -O1
+build/$(VERSION)/src/core1/ll.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/core1/ll.c.o: MIPSBIT := -mips3 -o32
-build/$(VERSION)/src/core1/ll_cvt.c.o: OPT_FLAGS := -O1
+build/$(VERSION)/src/core1/ll_cvt.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/core1/ll_cvt.c.o: MIPSBIT := -mips3 -o32
 
-build/$(VERSION)/src/bk_boot_27F0.c.o: OPT_FLAGS = -O2
-build/$(VERSION)/src/done/destroythread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pirawdma.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/thread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pimgr.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/getthreadid.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/setthreadpri.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/createthread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/yieldthread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/setglobalintmask.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/recvmesg.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/startthread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/devmgr.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/sendmesg.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pigetstat.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/si.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/resetglobalintmask.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/epirawwrite.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/epirawread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/createmesgqueue.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/leodiskinit.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/virtualtophysical.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/ll.c.o: OPT_FLAGS := -O1
+build/$(VERSION)/src/bk_boot_27F0.c.o: OPT_FLAGS = -O3
+build/$(VERSION)/src/done/destroythread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/pirawdma.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/thread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/pimgr.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/getthreadid.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/setthreadpri.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/createthread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/yieldthread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/setglobalintmask.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/recvmesg.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/startthread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/devmgr.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/sendmesg.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/pigetstat.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/si.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/resetglobalintmask.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/epirawwrite.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/epirawread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/createmesgqueue.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/leodiskinit.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/virtualtophysical.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/ll.c.o: OPT_FLAGS := -O3
 build/$(VERSION)/src/done/ll.c.o: MIPSBIT := -mips3 -o32
-build/$(VERSION)/src/done/sirawwrite.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/sirawread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/initialize.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pirawread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/seteventmesg.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/siacs.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/cartrominit.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/leointerrupt.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/epirawdma.c.o: OPT_FLAGS := -O1
+build/$(VERSION)/src/done/sirawwrite.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/sirawread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/initialize.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/pirawread.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/seteventmesg.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/siacs.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/cartrominit.c.o: OPT_FLAGS := -O3
+build/$(VERSION)/src/done/leointerrupt.c.o: OPT_FLAGS := -O2
+build/$(VERSION)/src/done/epirawdma.c.o: OPT_FLAGS := -O3
 
 # Disable implicit rules
 MAKEFLAGS += -r
