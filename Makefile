@@ -100,6 +100,7 @@ DECOMPRESSED_BASEROM := decompressed.$(VERSION).z64
 C_OBJS               := $(addprefix $(BUILD_DIR)/,$(C_SRCS:.c=.c.o))
 BOOT_C_OBJS          := $(addprefix $(BUILD_DIR)/,$(BOOT_C_SRCS:.c=.c.o))
 GLOBAL_ASM_C_OBJS    := $(addprefix $(BUILD_DIR)/,$(GLOBAL_ASM_C_SRCS:.c=.c.o))
+GLOBAL_ASM_C_OBJS   := $(filter-out $(GLOBAL_ASM_C_OBJS),"asm/nonmatchings/core1/code_1D00/func_80240204.s")
 C_DEPS               := $(C_OBJS:.o=.d)
 ASM_OBJS             := $(addprefix $(BUILD_DIR)/,$(ALL_ASM_SRCS:.s=.s.o) $(NEW_ASM_SRCS:.s=.s.o))
 BOOT_ASM_OBJS        := $(addprefix $(BUILD_DIR)/,$(BOOT_ASM_SRCS:.s=.s.o))
@@ -283,8 +284,8 @@ $(BOOT_MIPS3_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 $(BUILD_DIR)/SPLAT_TIMESTAMP: decompressed.$(VERSION).yaml $(SYMBOL_ADDRS) $(DECOMPRESSED_BASEROM) | $(BUILD_DIR)
 	$(call print1,Splitting rom:,$<)
 	@$(SPLAT) decompressed.$(VERSION).yaml
-	@touch $@
-	@touch $(LD_SCRIPT)
+
+
 
 # Dummy target to make the LD script and overlay rzips depend on splat being run
 #   without causing it to be rerun once for every overlay
@@ -326,12 +327,15 @@ $(DECOMPRESSED_BASEROM): $(BASEROM) $(BK_ROM_DECOMPRESS)
 	
 # .o -> .elf (dummy symbols)
 $(PRELIM_ELF): $(ALL_OBJS) $(LD_SCRIPT) $(ASSET_OBJS)
-	$(call print1,Linking elf:,$@)
+	$(call print1,Linking prelim elf:,$@)
+#	@awk '!/\*.*\*\);/' $(LD_SCRIPT) > temp.ld
+#	@mv temp.ld $(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -T rzip_dummy_addrs.$(VERSION).txt -o $@
 
 # .elf -> .z64 (dummy symbols)
 $(PRELIM_Z64) : $(PRELIM_ELF)
 	$(call print1,Creating z64:,$@)
+	$(call print1,Creating z64:,$(ASSET_OBJS))
 	@$(OBJCOPY) $< $@ -O binary $(OCOPYFLAGS)
 
 # generate compressed ROM symbols
@@ -371,11 +375,7 @@ clean:
 	@$(RM) -rf $(DECOMPRESSED_BASEROM)
 	@$(RM) -rf $(BIN_ROOT)
 	@$(RM) -rf $(NONMATCHING_DIR)
-	@$(RM) -rf $(ASM_ROOT)/*.s
-	@$(RM) -rf $(addprefix $(ASM_ROOT)/,$(filter-out core1,$(OVERLAYS)))
-	@$(RM) -rf $(ASM_ROOT)/core1/*.s
-	@$(RM) -rf $(ASM_ROOT)/core1/os
-	@$(RM) -f *.ld
+
 
 # Per-file flag definitions
 build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O1
