@@ -4,7 +4,6 @@ options:
   find_file_boundaries: False
   compiler: "IDO"
   platform: n64
-  asm_end_label: "endlabel"
   cpp_args:
     - "-Iinclude"
     - "-Iinclude/2.0L"
@@ -41,7 +40,6 @@ segments:
   vram:  0x80000400
   subsegments:
   - [0x1000, hasm, entry]
-
 - name: crc
   type: bin
   start: 0x5E70

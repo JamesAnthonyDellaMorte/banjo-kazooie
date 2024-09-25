@@ -455,8 +455,12 @@ void lair_func_8038F924(Actor *this) {
             this->unk1C[0] = 0.0f;
         }
         if (this->marker->unk14_21) {
-            s32 sp58[3] = D_80394824;
+            s32 sp58[3];
+           // sp58[0] = D_80394824[0];
+            //sp58[1] = D_80394824[1];
+            //sp58[2] = D_80394824[2];
             ParticleEmitter *sp54;
+            memcpy(sp58, D_80394824,sizeof(D_80394824));
             sp54 = partEmitMgr_newEmitter(6);
             particleEmitter_setSprite(sp54, ASSET_710_SPRITE_SPARKLE_PURPLE);
             particleEmitter_setAlpha(sp54, 0xFF);

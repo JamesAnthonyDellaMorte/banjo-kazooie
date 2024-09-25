@@ -85,9 +85,19 @@ void MM_func_80387FF4(Actor * this){
 
 Actor *func_80388188(ActorMarker *this, Gfx **dl, Mtx **mptr, Vtx **vtx){
     Actor* actorPtr = actor_drawFullDepth(this, dl, mptr, vtx);
-    f32 sp60[3] = D_803899F4;
-    f32 rotation[3] = D_80389A00;
+    f32 sp60[3];
+    f32 rotation[3];
     f32 position[3];
+   // sp60[0] = D_803899F4[0];
+   // sp60[1] = D_803899F4[1];
+//sp60[2] = D_803899F4[2];
+memcpy(sp60, D_803899F4, sizeof(D_803899F4));
+
+   // rotation[0] = D_80389A00[0];
+   // rotation[1] = D_80389A00[1];
+   // rotation[2] = D_80389A00[2];
+memcpy(rotation, D_80389A00, sizeof(D_80389A00));
+
 
     if(actorPtr->state == 2){
         position[0] = actorPtr->position_x;

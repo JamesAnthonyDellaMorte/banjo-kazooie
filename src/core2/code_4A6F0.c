@@ -104,7 +104,10 @@ bool chMumbo_withinHorzDistToPlayer(s32 x, s32 z, s32 dist) {
 
 
 bool chMumbo_func_802D181C(s32 arg0) {
-    s32 search_start_cube[3] = D_80367504;
+    s32 search_start_cube[3];
+    search_start_cube[0] = D_80367504[0];
+    search_start_cube[1] = D_80367504[1];
+    search_start_cube[2] = D_80367504[2];
     return (cubeList_findNodePropByActorId(arg0, search_start_cube))? TRUE : FALSE;
 }
 
@@ -481,8 +484,10 @@ Actor *chMumbo_draw(ActorMarker *marker, Gfx **gfx, Mtx **mtx, Vtx **vtx) {
     Actor *this = marker_getActor(marker);
     Actor *out;
     f32 sp44[3];
-    f32 sp38[3] = D_80367510;
-
+    f32 sp38[3];
+    sp38[0] = D_80367510[0];
+    sp38[1] = D_80367510[1];
+    sp38[2] = D_80367510[2];
     func_8033A45C(4, (this->lifetime_value == 0.0f));
     func_8033A45C(5, (this->lifetime_value == 1.0f));
     func_8033A45C(6, (this->lifetime_value == 0.0f));

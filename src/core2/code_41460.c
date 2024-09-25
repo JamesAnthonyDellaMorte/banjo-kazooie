@@ -254,8 +254,10 @@ void func_802C8C5C(Actor *actor) {
     f32 sp84[3];
     Struct25s *temp_s2 = actor->unk40;
     Struct24s *phi_s0;
-    s32 sp70[3] = D_80366418;
-
+    s32 sp70[3];
+    sp70[0] = D_80366418[0];
+    sp70[1] = D_80366418[1];
+    sp70[2] = D_80366418[2];
     for(phi_s0 = temp_s2->begin; phi_s0 < temp_s2->current; phi_s0++){
         if (phi_s0->unk0 == 2) {
             phi_s0->unk30[1] -= 1000.0f * temp_f0;
