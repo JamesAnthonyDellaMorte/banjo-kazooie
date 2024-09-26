@@ -83,7 +83,7 @@ NEW_BINS := $(filter-out $(ALL_BINS), $(YAML_BINS))
 NEW_FILES := $(NEW_C_SRCS) $(NEW_ASM_SRCS) $(NEW_BINS)
 BOOT_ASM_SRCS := $(filter-out asm/core1/%,$(NEW_ASM_SRCS) $(ALL_ASM_SRCS))
 # Any source files that have GLOBAL_ASM in them or do not exist before splitting
-GLOBAL_ASM_C_SRCS := $(shell $(GREP) GLOBAL_ASM $(SRC_ROOT) </dev/null) $(NEW_C_SRCS)
+GLOBAL_ASM_C_SRCS := $(NEW_C_SRCS)
 
 # Build folders
 C_DIRS         := $(sort $(dir $(C_SRCS) $(NEW_C_SRCS)))
@@ -101,7 +101,6 @@ DECOMPRESSED_BASEROM := decompressed.$(VERSION).z64
 C_OBJS               := $(addprefix $(BUILD_DIR)/,$(C_SRCS:.c=.c.o))
 BOOT_C_OBJS          := $(addprefix $(BUILD_DIR)/,$(BOOT_C_SRCS:.c=.c.o))
 GLOBAL_ASM_C_OBJS    := $(addprefix $(BUILD_DIR)/,$(GLOBAL_ASM_C_SRCS:.c=.c.o))
-GLOBAL_ASM_C_OBJS	   := $(filter-out $(GLOBAL_ASM_C_OBJS),"asm/nonmatchings/core1/code_1D00/func_80240204.s")
 C_DEPS               := $(C_OBJS:.o=.d)
 ASM_OBJS             := $(addprefix $(BUILD_DIR)/,$(ALL_ASM_SRCS:.s=.s.o) $(NEW_ASM_SRCS:.s=.s.o))
 BOOT_ASM_OBJS        := $(addprefix $(BUILD_DIR)/,$(BOOT_ASM_SRCS:.s=.s.o))

@@ -31,15 +31,15 @@ void cutscenes_func_803863F0(void){
 void func_80386410(void){
     func_8025A2FC(0, 0x96);
 }
-
+__attribute__((optimize("O0")))
 void func_80386434(void){
     comusic_8025AB44(COMUSIC_43_ENTER_LEVEL_GLITTER, 0, 300);
 }
-
+__attribute__((optimize("O0")))
 void func_8038645C(void){
     comusic_8025AB44(COMUSIC_32_STARTUP_LOGO_SCENE, 25000, 2000);
 }
-
+__attribute__((optimize("O0")))
 void func_80386484(void){
     comusic_8025AB44(COMUSIC_32_STARTUP_LOGO_SCENE, 0, 2000);
 }
