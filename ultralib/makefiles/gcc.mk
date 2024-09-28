@@ -40,7 +40,7 @@ endif
 # KMC gcc has a custom flag, N64ALIGN, which forces 8 byte alignment on arrays. This can be used to match, but
 # an explicit aligned(8) attribute can be used instead. We opted for the latter for better compatibilty with
 # other versions of GCC that do not have this flag.
-# export N64ALIGN := ON
+export N64ALIGN := ON
 export VR4300MUL := ON
 
 $(BUILD_DIR)/src/os/initialize_isv.marker: OPTFLAGS := -O2
@@ -64,3 +64,5 @@ MDEBUG_FILES := $(BUILD_DIR)/src/monutil.marker
 MDEBUG_COMPILER_DIR := $(WORKING_DIR)/tools/ido
 $(MDEBUG_FILES): AS := $(MDEBUG_COMPILER_DIR)/cc
 $(MDEBUG_FILES): ASFLAGS := -non_shared -mips2 -fullwarn -verbose -Xcpluscomm -G 0 -woff 516,649,838,712 -Wab,-r4300_mul -nostdinc -o32 -c
+$(BUILD_DIR)/src/gu/%.marker: OPTFLAGS := -O3
+$(BUILD_DIR)/src/mgu/%.marker: OPTFLAGS := -O3
