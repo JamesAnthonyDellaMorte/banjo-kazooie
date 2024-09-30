@@ -56,7 +56,7 @@ static const du	pilo =
 
 static const fu	zero = {0x00000000};
 
-
+
 /* ====================================================================
  *
  * FunctionName		fcos

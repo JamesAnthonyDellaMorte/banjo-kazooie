@@ -7,7 +7,7 @@
 void  func_802444C0(N_AL_Struct81s *arg0);
 void  func_80244050(ALEventQueue *arg0, N_AL_Struct81s *arg1, u16 arg2);
 
-void  func_8024324C(N_ALSndPlayer *arg0);
+ALMicroTime  func_8024324C(N_ALSndPlayer *arg0);
 void  func_802432F8(N_ALSndPlayer *sndp, N_ALEvent *event);
 void  func_80243F84(N_AL_Struct81s *arg0);
 void  func_80243FE4(N_AL_Struct81s *arg0);
@@ -48,6 +48,7 @@ void func_80243070(Struct87s *arg0) {
     D_802758CC->sndState = alHeapDBAlloc(NULL, 0, arg0->unkC, 1, arg0->unk0 * sizeof(N_AL_Struct81s));
     alEvtqNew(&D_802758CC->evtq, alHeapDBAlloc(NULL, 0, arg0->unkC, 1, arg0->unk4 * 0x1C), arg0->unk4);
     D_802758C0.unk8 = D_802758CC->sndState;
+
     for(var_s0 = 1; var_s0 < arg0->unk0; var_s0++){
         var_v0 =  (N_AL_Struct81s *)D_802758CC->sndState;
         temp_a0 = var_s0 + var_v0;
@@ -66,7 +67,7 @@ void func_80243070(Struct87s *arg0) {
     D_802758CC->nextDelta = alEvtqNextEvent(&D_802758CC->evtq, &D_802758CC->nextEvent);
 }
 
-void func_8024324C(N_ALSndPlayer *arg0)
+ALMicroTime func_8024324C(N_ALSndPlayer *arg0)
 {
   N_ALSndPlayer *new_var = (N_ALSndPlayer *)arg0;
   N_ALEvent2 sp3C;

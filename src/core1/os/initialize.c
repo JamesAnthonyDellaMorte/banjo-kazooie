@@ -19,7 +19,7 @@ extern void (*func_8026A2E0)(void);
 OSTime osClockRate = OS_CLOCK_RATE;
 s32 osViClock = VI_NTSC_CLOCK;
 u32 __osShutdown = 0;
-u32 __OSGlobalIntMask = OS_IM_ALL;
+u32 __OSGlobalIntMask  = OS_IM_ALL;
 /* .bss */
 u32 __osFinalrom;
 

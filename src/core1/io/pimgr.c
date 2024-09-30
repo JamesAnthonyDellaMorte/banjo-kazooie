@@ -4,7 +4,7 @@
 
 extern u32 __osPiAccessQueueEnabled;
 
-OSDevMgr __osPiDevMgr = {0};
+OSDevMgr __osPiDevMgr  = {0};
 OSPiHandle *__osPiTable = NULL;
 OSPiHandle *__osCurrentHandle[2] = {&CartRomHandle, &LeoDiskHandle};
 

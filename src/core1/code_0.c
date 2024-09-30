@@ -12,9 +12,9 @@ void func_8023DFF0(s32);
     extern s32 D_80000300;
 #endif
 
-s32 D_80275610 = 0;
-s32 D_80275614 = 0;
-u32 gGlobalTimer = 0;
+volatile s32 D_80275610 = 0;
+volatile s32 D_80275614 = 0;
+volatile u32 gGlobalTimer = 0;
 u32 D_8027561C[] = {
     0x9, 0x4, 0xA, 0x3, 0xB, 0x2, 0xC, 0x5, 0x0, 
     0x1, 0x6, 0xD,  -1

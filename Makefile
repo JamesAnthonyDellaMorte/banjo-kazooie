@@ -169,7 +169,7 @@ ASFLAGS        := -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 GCC_ASFLAGS    := -c -x assembler-with-cpp -mabi=32 -ffreestanding -mtune=vr4300 -march=vr4300 -mfix4300 -G 0 -O -mno-shared -fno-PIC -mno-abicalls
 LDFLAGS        :=  -T $(LD_SCRIPT)  -Map $(ELF:.elf=.map)  --no-check-section --accept-unknown-input-arch -T manual_syms.$(VERSION).txt -L/banjo/ultralib/libs 
 BINOFLAGS      := -I binary -O elf32-tradbigmips
-GCC_CFLAGS         :=  -G 0 -c -nostdinc -march=vr4300 -mfix4300 -mabi=32 -mno-abicalls -mdivide-breaks -fno-PIC -fno-common -ffreestanding -fno-builtin -funsigned-char -Wall -Wextra -Wno-format-security -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-builtin-declaration-mismatch -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration    -DMODERN_CC -D_MIPS_SZLONG=32 -D__USE_ISOC99 -DF3DEX_GBI -DBUILD_VERSION=VERSION_L -DBUILD_VERSION_STRING=\"2.0L\" -DNDEBUG -D_FINALROM 
+GCC_CFLAGS         :=  -G0 -c -nostdinc -fno-merge-constants -fno-toplevel-reorder -march=vr4300 -mfix4300 -mabi=32 -mno-abicalls -fno-inline-functions -fno-strict-aliasing -fno-zero-initialized-in-bss -mdivide-breaks -fno-PIC -fno-common -ffreestanding -fno-builtin -funsigned-char -Wall -Wextra -Wno-format-security -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-builtin-declaration-mismatch -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration    -DMODERN_CC -D_MIPS_SZLONG=32 -D__USE_ISOC99 -DF3DEX_GBI -DBUILD_VERSION=VERSION_L -DBUILD_VERSION_STRING=\"2.0L\" -DNDEBUG -D_FINALROM 
 #GCC_CFLAGS  	   +=  -Wall -Wextra -Wno-format-security -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-builtin-declaration-mismatch -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration  
 #GCC_CFLAGS   	   += -fno-strict-aliasing -Os -ggdb3 -ffast-math -fno-unsafe-math-optimizations -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
 #GCC_2_CFLAGS         := -c $(MIPSBIT) -mhard-float -mdivide-breaks -fno-strict-aliasing -fno-inline-functions -mabi=32 -fno-common -fno-zero-initialized-in-bss -ffreestanding  -G 0 -O -mno-shared -fno-PIC -mno-abicalls -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
@@ -251,39 +251,7 @@ $(BIN_OBJS) : $(BUILD_DIR)/%.bin.o : %.bin | $(BIN_BUILD_DIRS)
 # Rule for src/core1
 $(BUILD_DIR)/src/core1/%.c.o : src/core1/%.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling src/core1 with GCC:,$<,$@)
-	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
-
-$(BUILD_DIR)/src/core1/gu/ortho.c.o : src/core1/gu/ortho.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with IDO:,$<,$@)
-	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $-O3  $(MIPSBIT) -o $@ $<
-
-$(BUILD_DIR)/src/core1/gu/translate.c.o : src/core1/gu/translate.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with IDO:,$<,$@)
-	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $-O3  $(MIPSBIT) -o $@ $<
-
-$(BUILD_DIR)/src/core1/gu/sqrtf.c.o : src/core1/gu/sqrtf.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with GCC:,$<,$@)
-	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS)  -O3 -mips3 -o $@ $<
-	
-$(BUILD_DIR)/src/core1/gu/mtxutil.c.o : src/core1/gu/mtxutil.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with IDO:,$<,$@)
-	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) -O3  $(MIPSBIT) -o $@ $<
-
-$(BUILD_DIR)/src/core1/gu/rotate.c.o : src/core1/gu/rotate.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with IDO:,$<,$@)
-	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
-
-$(BUILD_DIR)/src/core1/gu/cosf.s.o : src/core1/gu/cosf.s | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with GCC:,$<,$@)
-	@$(GCC) $(GCC_ASFLAGS) $(INCLUDE_CFLAGS) -o $@ $<
-	
-$(BUILD_DIR)/src/core1/gu/sinf.c.o : src/core1/gu/sinf.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with GCC:,$<,$@)
-	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS)  -O3 -mips3 -o $@ $<
-
-$(BUILD_DIR)/src/core1/gu/normalize.c.o : src/core1/gu/normalize.c | $(C_BUILD_DIRS)
-	$(call print2,Compiling src/core1 with IDO:,$<,$@)
-	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) -O3 $(MIPSBIT) -o $@ $<
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) -O3 -mips3 -o $@ $<
 # Rule for src/core2
 $(BUILD_DIR)/src/core2/%.c.o : src/core2/%.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling src/core2 with IDO:,$<,$@)
@@ -423,11 +391,11 @@ clean:
 
 
 # Per-file flag definitions
-build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O1
-build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O1
-build/$(VERSION)/src/core1/gu/%.c.o: OPT_FLAGS = -O3
+build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O0
+build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O0
+build/$(VERSION)/src/core1/gu/%.c.o: OPT_FLAGS = -O0
 build/$(VERSION)/src/core1/gu/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
-build/$(VERSION)/src/core1/audio/%.c.o: OPT_FLAGS = -O3
+build/$(VERSION)/src/core1/audio/%.c.o: OPT_FLAGS = -O0
 build/$(VERSION)/src/core1/audio/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
 build/$(VERSION)/src/core1/ll.c.o: OPT_FLAGS := -O1
 build/$(VERSION)/src/core1/ll.c.o: MIPSBIT :=  -mips3 -o32

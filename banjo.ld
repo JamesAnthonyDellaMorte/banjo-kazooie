@@ -467,6 +467,7 @@ SECTIONS
         build/us.v10/src/core1/os/setglobalintmask.c.o(.text);
         build/us.v10/src/core1/os/yieldthread.c.o(.text);
         core1_DATA_START = .;
+        
         core1_n_aspMain_text_bin = .;
         build/us.v10/bin/core1/n_aspMain_text.bin.o(.data);
         core1_gSPF3DEX_fifo_text_bin = .;
@@ -572,9 +573,15 @@ SECTIONS
         build/us.v10/src/core1/io/vimodempallan1.c.o(.data);
         core1_io_vimodentsclan1_c = .;
         build/us.v10/src/core1/io/vimodentsclan1.c.o(.data);
+         build/us.v10/src/core1/gu/rotate.c.o(.data);
         core1_RODATA_START = .;
+
+        build/us.v10/src/core1/io/aisetfreq.c.o(.rodata);
+        build/us.v10/src/core1/io/viswapcontext.c.o(.rodata);
+        build/us.v10/src/core1/io/devmgr.c.o(.rodata);
         build/us.v10/src/core1/code_1D00.c.o(.rodata);
         build/us.v10/src/core1/code_3250.c.o(.rodata);
+        build/us.v10/src/core1/gu/mtxutil.c.o(.rodata);
         build/us.v10/src/core1/code_3A70.c.o(.rodata);
         build/us.v10/src/core1/code_5650.c.o(.rodata);
         build/us.v10/src/core1/code_72B0.c.o(.rodata);
@@ -602,11 +609,19 @@ SECTIONS
         build/us.v10/src/core1/gu/cosf.c.o(.rodata);
         build/us.v10/asm/core1/ultra/setintmask.s.o(.rodata);
         build/us.v10/src/core1/gu/rotate.c.o(.rodata);
+        build/us.v10/src/core1/gu/ortho.c.o(.rodata);
+        build/us.v10/src/core1/gu/normalize.c.o(.rodata);
+        build/us.v10/src/core1/gu/translate.c.o(.rodata);
         build/us.v10/src/core1/audio/cseq.c.o(.rodata);
         build/us.v10/src/core1/audio/drvrNew.c.o(.rodata);
         build/us.v10/src/core1/audio/reverb.c.o(.rodata);
         build/us.v10/src/core1/audio/seq.c.o(.rodata);
         build/us.v10/asm/core1/ultra/exceptasm.s.o(.rodata);
+        build/us.v10/src/core1/audio/n_csq.c.o(.rodata);
+        build/us.v10/src/core1/code_2FA0.c.o(.rodata);
+        build/us.v10/src/core1/code_ABB0.c.o(.rodata);
+        build/us.v10/src/core1/code_15B30.c.o(.rodata);
+        build/us.v10/src/core1/code_660.c.o(.rodata)
         build/us.v10/asm/core1/ultra/libm_vals.s.o(.text);
         core1_TEXT_END = .;
         core1_TEXT_SIZE = ABSOLUTE(core1_TEXT_END - core1_TEXT_START);
@@ -624,6 +639,7 @@ SECTIONS
         core1_gSPL3DEX_fifo_data_bin = .;
         build/us.v10/bin/core1/gSPL3DEX_fifo_data.bin.o(.data);
         core1_DATA_END = .;
+        
         core1_DATA_SIZE = ABSOLUTE(core1_DATA_END - core1_DATA_START);
     }
     core1_bss_VRAM = ADDR(.core1_bss);
@@ -3253,6 +3269,13 @@ SECTIONS
     emptyLvl_ROM_END = __romPos;
     emptyLvl_VRAM_END = .;
 
-
+.rodata : {
+    *(.rodata)
+    *(.rodata.*)
+}
+    /DISCARD/ :
+    {
+        *(*);
+    }
 
 }

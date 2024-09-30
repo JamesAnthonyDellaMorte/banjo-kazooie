@@ -4,8 +4,10 @@
 struct __osThreadTail __osThreadTail = {0, -1};
 OSThread *__osRunQueue = (OSThread *)&__osThreadTail;
 OSThread *__osActiveQueue = (OSThread *)&__osThreadTail;
+#pragma data_section(".data")
 OSThread *__osRunningThread = {0};
 OSThread *__osFaultedThread = {0};
+#pragma data_section() // Reset to default section
 void __osDequeueThread(OSThread **queue, OSThread *t)
 {
    register OSThread *pred;
