@@ -4,7 +4,6 @@
 
 /* .bss */
 s32 D_80382460;
-
 /* .code */
 void func_8030C740(void){
     f32 sp1C[3];

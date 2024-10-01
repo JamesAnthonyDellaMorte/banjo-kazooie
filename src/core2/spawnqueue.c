@@ -14,7 +14,7 @@ Actor *func_802D7558(s32 *, s32, ActorInfo*, u32);
 Actor *func_802D75B4(s32 *, s32, ActorInfo*, u32);
 Actor *func_802D7610(s32 *, s32, ActorInfo*, u32);
 Actor *chBottlesBonus_new(s32 *, s32, ActorInfo*, u32);
-
+extern void *defrag(void *this);
 extern ActorInfo D_80365E58; //banjo.without_right_hand
 extern ActorInfo D_80365EAC; //banjo.playing_gameboy
 extern ActorInfo D_80365F00; //banjo.cooking
@@ -595,5 +595,5 @@ Actor * func_802C42F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3){
 
 void spawnQueue_defrag(FunctionQueue *arg0){
     if((arg0 = spawnQueue) != NULL)
-        spawnQueue = (FunctionQueue *)defrag();
+        spawnQueue = (FunctionQueue *)defrag(arg0);
 }

@@ -7,7 +7,7 @@
 #include <core2/file.h>
 
 #define AssetCacheSize 0x3D5
-
+extern void vtxList_getCenterAndNorm(BKVertexList *this, f32 center[3], f32 *norm);
 extern int func_802E74A0(f32[3], f32, s32, s32);
 extern s32 func_802E9118(BKCollisionList * collision_list, BKVertexList *vtx_list, f32 arg2[3], s32 arg3, f32 arg4, f32 arg5[3], f32 arg6[3], f32 arg7, f32 arg8[3], s32 arg9, s32 argA);
 extern f32 vtxList_getGlobalNorm(BKVertexList *);
@@ -164,6 +164,7 @@ void func_8032CB50(Cube *cube, bool global) {
         func_80330104(cube);
     }
 }
+
 
 void func_8032CD60(Prop *prop) {
     BKSprite *var_v0;
@@ -1187,18 +1188,20 @@ ActorMarker * marker_init(s32 *pos, MarkerDrawFunc draw_func, int arg2, int mark
     return marker;
 }
 
+
 ActorMarker * func_8032FB80(f32 *pos, MarkerDrawFunc arg1, int arg2, enum asset_e model_id, int arg4){
-    s32 sp24[3];
-    sp24[0] = pos[0];
+    f32 sp24[3];  // Declare sp24 as an f32 array
+    sp24[0] = pos[0];  // Copy the float values correctly
     sp24[1] = pos[1];
     sp24[2] = pos[2];
-    marker_init(sp24, arg1, arg2, model_id, arg4);
+    return marker_init(sp24, arg1, arg2, model_id, arg4);  // Pass sp24 directly, no need for casting
 }
+
+
 
 ActorMarker * func_8032FBE4(f32 *pos, MarkerDrawFunc arg1, int arg2, enum asset_e model_id){
     return func_8032FB80(pos, arg1, arg2, model_id, 0);
 }
-
 void func_8032FC04(ActorMarker *marker, f32 rotation[3]) {
     marker->pitch = rotation[0];
     marker->yaw  = rotation[1];

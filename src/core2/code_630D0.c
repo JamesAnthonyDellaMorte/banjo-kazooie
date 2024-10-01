@@ -5,7 +5,9 @@
 #include "ml/mtx.h"
 
 void *defrag(void *);
-
+extern void func_80345274(f32 arg0[4], f32 arg1[3][3]);
+extern void func_802515D4(f32 arg0[3][3]);
+extern bool vec4f_isZero(f32 arg0[4]);
 void animMtxList_setBoneless(AnimMtxList **this_ptr, BKAnimationList *anim_list){
     AnimMtxList * this;
     MtxF *end_ptr;
@@ -63,7 +65,8 @@ void animMtxList_setBoned(AnimMtxList **this_ptr, BKAnimationList *anim_list, Bo
     BKAnimation *s0;
     f32 tmp_f0;
     s32 pad94[1];
-    f32 sp88[3];
+    f32 sp88[3][3];
+
     s32 pad80[1];
     f32 sp74[4];
     f32 sp68[3];
