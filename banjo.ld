@@ -573,7 +573,12 @@ SECTIONS
         build/us.v10/src/core1/io/vimodempallan1.c.o(.data);
         core1_io_vimodentsclan1_c = .;
         build/us.v10/src/core1/io/vimodentsclan1.c.o(.data);
-         build/us.v10/src/core1/gu/rotate.c.o(.data);
+
+        core1_gu_rotatee_c = .;
+        build/us.v10/src/core1/gu/rotate.c.o(.data);
+        
+        core1_gcc_fix_c = .;
+        build/us.v10/src/gcc_fix/gcc_fix.c.o(.data)
         core1_RODATA_START = .;
 
         build/us.v10/src/core1/io/aisetfreq.c.o(.rodata*);
