@@ -47,7 +47,7 @@ SECTIONS
         entry_DATA_END = .;
         entry_DATA_SIZE = ABSOLUTE(entry_DATA_END - entry_DATA_START);
         entry_RODATA_START = .;
-        build/us.v10/asm/entry.s.o(.rodata*);
+        build/us.v10/asm/entry.s.o(.rodata);
         entry_RODATA_END = .;
         entry_RODATA_SIZE = ABSOLUTE(entry_RODATA_END - entry_RODATA_START);
     }
@@ -135,9 +135,9 @@ SECTIONS
         boot_bk_boot_DATA_END = .;
         boot_bk_boot_DATA_SIZE = ABSOLUTE(boot_bk_boot_DATA_END - boot_bk_boot_DATA_START);
         boot_bk_boot_RODATA_START = .;
-        build/us.v10/asm/ultra/exceptasm.s.o(.rodata*);
-        build/us.v10/asm/ultra/setintmask.s.o(.rodata*);
-        build/us.v10/src/done/devmgr.c.o(.rodata*);
+        build/us.v10/asm/ultra/exceptasm.s.o(.rodata);
+        build/us.v10/asm/ultra/setintmask.s.o(.rodata);
+        build/us.v10/src/done/devmgr.c.o(.rodata);
         boot_bk_boot_RODATA_END = .;
         boot_bk_boot_RODATA_SIZE = ABSOLUTE(boot_bk_boot_RODATA_END - boot_bk_boot_RODATA_START);
     }
@@ -573,70 +573,64 @@ SECTIONS
         build/us.v10/src/core1/io/vimodempallan1.c.o(.data);
         core1_io_vimodentsclan1_c = .;
         build/us.v10/src/core1/io/vimodentsclan1.c.o(.data);
-
-        core1_gu_rotatee_c = .;
-        build/us.v10/src/core1/gu/rotate.c.o(.data);
-        
-        core1_gcc_fix_c = .;
-        build/us.v10/src/gcc_fix/gcc_fix.c.o(.data)
+         build/us.v10/src/core1/gu/rotate.c.o(.data);
         core1_RODATA_START = .;
 
-        build/us.v10/src/core1/io/aisetfreq.c.o(.rodata*);
-        build/us.v10/src/core1/io/viswapcontext.c.o(.rodata*);
-        build/us.v10/src/core1/io/leointerrupt.c.o(.rodata*);
-        build/us.v10/src/core1/io/devmgr.c.o(.rodata*);
-        build/us.v10/src/core1/code_1D00.c.o(.rodata*);
-        build/us.v10/src/core1/code_3250.c.o(.rodata*);
-        build/us.v10/src/core1/gu/mtxutil.c.o(.rodata*);
-        build/us.v10/src/core1/code_3A70.c.o(.rodata*);
-        build/us.v10/src/core1/code_5650.c.o(.rodata*);
-        build/us.v10/src/core1/code_72B0.c.o(.rodata*);
-        build/us.v10/src/core1/code_7F60.c.o(.rodata*);
-        build/us.v10/src/core1/code_9D30.c.o(.rodata*);
-        build/us.v10/src/core1/code_CE60.c.o(.rodata*);
-        build/us.v10/src/core1/code_EAF0.c.o(.rodata*);
-        build/us.v10/src/core1/code_10A00.c.o(.rodata*);
-        build/us.v10/src/core1/code_11AC0.c.o(.rodata*);
-        build/us.v10/src/core1/rumblemanager.c.o(.rodata*);
-        build/us.v10/src/core1/overlaymanager.c.o(.rodata*);
-        build/us.v10/src/core1/code_13990.c.o(.rodata*);
-        build/us.v10/src/core1/code_18350.c.o(.rodata*);
-        build/us.v10/src/core1/code_1BE90.c.o(.rodata*);
-        build/us.v10/src/core1/code_1D5D0.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_synthesizer.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_csplayer.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_reverb.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_drvrNew.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_env.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_seqplayer.c.o(.rodata*);
-        build/us.v10/src/core1/audio/n_resample.c.o(.rodata*);
-        build/us.v10/src/core1/gu/sinf.c.o(.rodata*);
-        build/us.v10/src/core1/audio/cents2ratio.c.o(.rodata*);
-        build/us.v10/src/core1/gu/cosf.c.o(.rodata*);
-        build/us.v10/asm/core1/ultra/setintmask.s.o(.rodata*);
-        build/us.v10/src/core1/gu/rotate.c.o(.rodata*);
-        build/us.v10/src/core1/gu/ortho.c.o(.rodata*);
-        build/us.v10/src/core1/gu/normalize.c.o(.rodata*);
-        build/us.v10/src/core1/gu/translate.c.o(.rodata*);
-        build/us.v10/src/core1/audio/cseq.c.o(.rodata*);
-        build/us.v10/src/core1/audio/drvrNew.c.o(.rodata*);
-        build/us.v10/src/core1/audio/reverb.c.o(.rodata*);
-        build/us.v10/src/core1/audio/seq.c.o(.rodata*);
-        build/us.v10/asm/core1/ultra/exceptasm.s.o(.rodata*);
-        build/us.v10/src/core1/audio/n_csq.c.o(.rodata*);
-        build/us.v10/src/core1/code_2FA0.c.o(.rodata*);
-        build/us.v10/src/core1/code_ABB0.c.o(.rodata*);
-        build/us.v10/src/core1/code_15B30.c.o(.rodata*);
-        build/us.v10/src/core1/code_660.c.o(.rodata*)
-        build/us.v10/src/gcc_fix/gcc_fix.c.o(.rodata*)
+        build/us.v10/src/core1/io/aisetfreq.c.o(.rodata);
+        build/us.v10/src/core1/io/viswapcontext.c.o(.rodata);
+        build/us.v10/src/core1/io/devmgr.c.o(.rodata);
+        build/us.v10/src/core1/code_1D00.c.o(.rodata);
+        build/us.v10/src/core1/code_3250.c.o(.rodata);
+        build/us.v10/src/core1/gu/mtxutil.c.o(.rodata);
+        build/us.v10/src/core1/code_3A70.c.o(.rodata);
+        build/us.v10/src/core1/code_5650.c.o(.rodata);
+        build/us.v10/src/core1/code_72B0.c.o(.rodata);
+        build/us.v10/src/core1/code_7F60.c.o(.rodata);
+        build/us.v10/src/core1/code_9D30.c.o(.rodata);
+        build/us.v10/src/core1/code_CE60.c.o(.rodata);
+        build/us.v10/src/core1/code_EAF0.c.o(.rodata);
+        build/us.v10/src/core1/code_10A00.c.o(.rodata);
+        build/us.v10/src/core1/code_11AC0.c.o(.rodata);
+        build/us.v10/src/core1/rumblemanager.c.o(.rodata);
+        build/us.v10/src/core1/overlaymanager.c.o(.rodata);
+        build/us.v10/src/core1/code_13990.c.o(.rodata);
+        build/us.v10/src/core1/code_18350.c.o(.rodata);
+        build/us.v10/src/core1/code_1BE90.c.o(.rodata);
+        build/us.v10/src/core1/code_1D5D0.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_synthesizer.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_csplayer.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_reverb.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_drvrNew.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_env.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_seqplayer.c.o(.rodata);
+        build/us.v10/src/core1/audio/n_resample.c.o(.rodata);
+        build/us.v10/src/core1/gu/sinf.c.o(.rodata);
+        build/us.v10/src/core1/audio/cents2ratio.c.o(.rodata);
+        build/us.v10/src/core1/gu/cosf.c.o(.rodata);
+        build/us.v10/asm/core1/ultra/setintmask.s.o(.rodata);
+        build/us.v10/src/core1/gu/rotate.c.o(.rodata);
+        build/us.v10/src/core1/gu/ortho.c.o(.rodata);
+        build/us.v10/src/core1/gu/normalize.c.o(.rodata);
+        build/us.v10/src/core1/gu/translate.c.o(.rodata);
+        build/us.v10/src/core1/audio/cseq.c.o(.rodata);
+        build/us.v10/src/core1/audio/drvrNew.c.o(.rodata);
+        build/us.v10/src/core1/audio/reverb.c.o(.rodata);
+        build/us.v10/src/core1/audio/seq.c.o(.rodata);
+        build/us.v10/asm/core1/ultra/exceptasm.s.o(.rodata);
+        build/us.v10/src/core1/audio/n_csq.c.o(.rodata);
+        build/us.v10/src/core1/code_2FA0.c.o(.rodata);
+        build/us.v10/src/core1/code_ABB0.c.o(.rodata);
+        build/us.v10/src/core1/code_15B30.c.o(.rodata);
+        build/us.v10/src/core1/code_660.c.o(.rodata)
+        build/us.v10/src/gcc_fix/gcc_fix.c.o(.rodata)
         build/us.v10/asm/core1/ultra/libm_vals.s.o(.text);
         core1_TEXT_END = .;
         core1_TEXT_SIZE = ABSOLUTE(core1_TEXT_END - core1_TEXT_START);
-        build/us.v10/asm/core1/ultra/libm_vals.s.o(.rodata*);
-        build/us.v10/src/core1/audio/synthesizer.c.o(.rodata*);
-        build/us.v10/src/core1/io/devmgr.c.o(.rodata*);
-        build/us.v10/src/core1/audio/env.c.o(.rodata*);
-        build/us.v10/src/core1/audio/resample.c.o(.rodata*);
+        build/us.v10/asm/core1/ultra/libm_vals.s.o(.rodata);
+        build/us.v10/src/core1/audio/synthesizer.c.o(.rodata);
+        build/us.v10/src/core1/io/devmgr.c.o(.rodata);
+        build/us.v10/src/core1/audio/env.c.o(.rodata);
+        build/us.v10/src/core1/audio/resample.c.o(.rodata);
         core1_RODATA_END = .;
         core1_RODATA_SIZE = ABSOLUTE(core1_RODATA_END - core1_RODATA_START);
         core1_n_aspMain_data_bin = .;
@@ -1552,323 +1546,323 @@ SECTIONS
         core2_DATA_END = .;
         core2_DATA_SIZE = ABSOLUTE(core2_DATA_END - core2_DATA_START);
         core2_RODATA_START = .;
-        build/us.v10/src/core2/animctrl.c.o(.rodata*);
-        build/us.v10/src/core2/anim/sprite.c.o(.rodata*);
-        build/us.v10/src/core2/code_1930.c.o(.rodata*);
-        build/us.v10/src/core2/ba/anim.c.o(.rodata*);
-        build/us.v10/src/core2/snackerctl.c.o(.rodata*);
-        build/us.v10/src/core2/code_39D0.c.o(.rodata*);
-        build/us.v10/src/core2/ba/marker.c.o(.rodata*);
-        build/us.v10/src/core2/code_6B30.c.o(.rodata*);
-        build/us.v10/src/core2/code_7060.c.o(.rodata*);
-        build/us.v10/src/core2/code_9450.c.o(.rodata*);
-        build/us.v10/src/core2/code_9900.c.o(.rodata*);
-        build/us.v10/src/core2/code_9BD0.c.o(.rodata*);
-        build/us.v10/src/core2/ba/model.c.o(.rodata*);
-        build/us.v10/src/core2/ba/drone.c.o(.rodata*);
-        build/us.v10/src/core2/code_B850.c.o(.rodata*);
-        build/us.v10/src/core2/code_BD20.c.o(.rodata*);
-        build/us.v10/src/core2/ba/falldamage.c.o(.rodata*);
-        build/us.v10/src/core2/code_C4B0.c.o(.rodata*);
-        build/us.v10/src/core2/code_D9B0.c.o(.rodata*);
-        build/us.v10/src/core2/abilityprogress.c.o(.rodata*);
-        build/us.v10/src/core2/code_EF50.c.o(.rodata*);
-        build/us.v10/src/core2/ba/physics.c.o(.rodata*);
-        build/us.v10/src/core2/code_10CD0.c.o(.rodata*);
-        build/us.v10/src/core2/pitch.c.o(.rodata*);
-        build/us.v10/src/core2/code_11040.c.o(.rodata*);
-        build/us.v10/src/core2/climb.c.o(.rodata*);
-        build/us.v10/src/core2/code_11660.c.o(.rodata*);
-        build/us.v10/src/core2/code_11870.c.o(.rodata*);
-        build/us.v10/src/core2/roll.c.o(.rodata*);
-        build/us.v10/src/core2/yaw.c.o(.rodata*);
-        build/us.v10/src/core2/code_12360.c.o(.rodata*);
-        build/us.v10/src/core2/code_126C0.c.o(.rodata*);
-        build/us.v10/src/core2/code_12F30.c.o(.rodata*);
-        build/us.v10/src/core2/code_13FC0.c.o(.rodata*);
-        build/us.v10/src/core2/code_14420.c.o(.rodata*);
-        build/us.v10/src/core2/code_16010.c.o(.rodata*);
-        build/us.v10/src/core2/code_16C60.c.o(.rodata*);
-        build/us.v10/src/core2/bs/ant.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bBarge.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bbuster.c.o(.rodata*);
-        build/us.v10/src/core2/bs/beeFly.c.o(.rodata*);
-        build/us.v10/src/core2/bs/beeMain.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bEggAss.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bEggHead.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bFlap.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bFlip.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bFly.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bLongLeg.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bPeck.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bShock.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bSwim.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bTrot.c.o(.rodata*);
-        build/us.v10/src/core2/bs/bWhirl.c.o(.rodata*);
-        build/us.v10/src/core2/bs/carry.c.o(.rodata*);
-        build/us.v10/src/core2/bs/claw.c.o(.rodata*);
-        build/us.v10/src/core2/bs/climb.c.o(.rodata*);
-        build/us.v10/src/core2/bs/croc.c.o(.rodata*);
-        build/us.v10/src/core2/bs/crouch.c.o(.rodata*);
-        build/us.v10/src/core2/bs/die.c.o(.rodata*);
-        build/us.v10/src/core2/bs/droneenter.c.o(.rodata*);
-        build/us.v10/src/core2/bs/dronegoto.c.o(.rodata*);
-        build/us.v10/src/core2/bs/dronelook.c.o(.rodata*);
-        build/us.v10/src/core2/bs/dronevanish.c.o(.rodata*);
-        build/us.v10/src/core2/bs/dronexform.c.o(.rodata*);
-        build/us.v10/src/core2/bs/jig.c.o(.rodata*);
-        build/us.v10/src/core2/bs/jump.c.o(.rodata*);
-        build/us.v10/src/core2/bs/ow.c.o(.rodata*);
-        build/us.v10/src/core2/bs/pumpkin.c.o(.rodata*);
-        build/us.v10/src/core2/bs/rebound.c.o(.rodata*);
-        build/us.v10/src/core2/bs/rest.c.o(.rodata*);
-        build/us.v10/src/core2/bs/slide.c.o(.rodata*);
-        build/us.v10/src/core2/bs/stand.c.o(.rodata*);
-        build/us.v10/src/core2/bs/swim.c.o(.rodata*);
-        build/us.v10/src/core2/bs/surf.c.o(.rodata*);
-        build/us.v10/src/core2/bs/talk.c.o(.rodata*);
-        build/us.v10/src/core2/bs/timeout.c.o(.rodata*);
-        build/us.v10/src/core2/bs/throw.c.o(.rodata*);
-        build/us.v10/src/core2/bs/turn.c.o(.rodata*);
-        build/us.v10/src/core2/bs/twirl.c.o(.rodata*);
-        build/us.v10/src/core2/bs/walk.c.o(.rodata*);
-        build/us.v10/src/core2/bs/walrus.c.o(.rodata*);
-        build/us.v10/src/core2/bs/washy.c.o(.rodata*);
-        build/us.v10/src/core2/nc/cameranodelist.c.o(.rodata*);
-        build/us.v10/src/core2/code_33F90.c.o(.rodata*);
-        build/us.v10/src/core2/code_34310.c.o(.rodata*);
-        build/us.v10/src/core2/code_34790.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCamera.c.o(.rodata*);
-        build/us.v10/src/core2/code_37E50.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam10.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCamD.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam5.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam4.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCamC.c.o(.rodata*);
-        build/us.v10/src/core2/code_F8EAF0.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCamB.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam13.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam9.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam12.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCam3.c.o(.rodata*);
-        build/us.v10/src/core2/nc/dynamicCamA.c.o(.rodata*);
-        build/us.v10/src/core2/spawnqueue.c.o(.rodata*);
-        build/us.v10/src/core2/ch/gameSelect.c.o(.rodata*);
-        build/us.v10/src/core2/ch/bubble.c.o(.rodata*);
-        build/us.v10/src/core2/ch/bigbutt.c.o(.rodata*);
-        build/us.v10/src/core2/code_400F0.c.o(.rodata*);
-        build/us.v10/src/core2/ch/jiggy.c.o(.rodata*);
-        build/us.v10/src/core2/ch/jigsawdance.c.o(.rodata*);
-        build/us.v10/src/core2/code_41460.c.o(.rodata*);
-        build/us.v10/src/core2/code_41FB0.c.o(.rodata*);
-        build/us.v10/src/core2/ch/musicnote.c.o(.rodata*);
-        build/us.v10/src/core2/code_42CB0.c.o(.rodata*);
-        build/us.v10/src/core2/ch/trainers.c.o(.rodata*);
-        build/us.v10/src/core2/code_43800.c.o(.rodata*);
-        build/us.v10/src/core2/ch/crab.c.o(.rodata*);
-        build/us.v10/src/core2/code_45310.c.o(.rodata*);
-        build/us.v10/src/core2/ch/jinjo.c.o(.rodata*);
-        build/us.v10/src/core2/ch/beehive.c.o(.rodata*);
-        build/us.v10/src/core2/code_47BD0.c.o(.rodata*);
-        build/us.v10/src/core2/ch/shrapnel.c.o(.rodata*);
-        build/us.v10/src/core2/ch/gloop.c.o(.rodata*);
-        build/us.v10/src/core2/code_4A6F0.c.o(.rodata*);
-        build/us.v10/src/core2/code_4C020.c.o(.rodata*);
-        build/us.v10/src/core2/ch/badShad.c.o(.rodata*);
-        build/us.v10/src/core2/code_50490.c.o(.rodata*);
-        build/us.v10/src/core2/code_509D0.c.o(.rodata*);
-        build/us.v10/src/core2/code_517A0.c.o(.rodata*);
-        build/us.v10/src/core2/code_51950.c.o(.rodata*);
-        build/us.v10/src/core2/ch/mole.c.o(.rodata*);
-        build/us.v10/src/core2/code_53C10.c.o(.rodata*);
-        build/us.v10/src/core2/code_54D50.c.o(.rodata*);
-        build/us.v10/src/core2/code_55180.c.o(.rodata*);
-        build/us.v10/src/core2/code_55390.c.o(.rodata*);
-        build/us.v10/src/core2/ch/overlaypressstart.c.o(.rodata*);
-        build/us.v10/src/core2/ch/overlaynocontroller.c.o(.rodata*);
-        build/us.v10/src/core2/ch/bottlesbonus.c.o(.rodata*);
-        build/us.v10/src/core2/code_57C70.c.o(.rodata*);
-        build/us.v10/src/core2/code_581D0.c.o(.rodata*);
-        build/us.v10/src/core2/ch/bottlesbonuscursor.c.o(.rodata*);
-        build/us.v10/src/core2/code_599E0.c.o(.rodata*);
-        build/us.v10/src/core2/code_59A80.c.o(.rodata*);
-        build/us.v10/src/core2/ch/snacker.c.o(.rodata*);
-        build/us.v10/src/core2/ch/snowman.c.o(.rodata*);
-        build/us.v10/src/core2/ch/snowball.c.o(.rodata*);
-        build/us.v10/src/core2/code_5C240.c.o(.rodata*);
-        build/us.v10/src/core2/code_5C870.c.o(.rodata*);
-        build/us.v10/src/core2/code_5FD90.c.o(.rodata*);
-        build/us.v10/src/core2/code_66FB0.c.o(.rodata*);
-        build/us.v10/src/core2/code_67650.c.o(.rodata*);
-        build/us.v10/src/core2/particle.c.o(.rodata*);
-        build/us.v10/src/core2/code_6A4B0.c.o(.rodata*);
-        build/us.v10/src/core2/code_6B030.c.o(.rodata*);
-        build/us.v10/src/core2/fx/ripple.c.o(.rodata*);
-        build/us.v10/src/core2/fx/sparkle.c.o(.rodata*);
-        build/us.v10/src/core2/code_6CEC0.c.o(.rodata*);
-        build/us.v10/src/core2/code_6D030.c.o(.rodata*);
-        build/us.v10/src/core2/code_6D270.c.o(.rodata*);
-        build/us.v10/src/core2/code_6DA30.c.o(.rodata*);
-        build/us.v10/src/core2/code_70F20.c.o(.rodata*);
-        build/us.v10/src/core2/code_71820.c.o(.rodata*);
-        build/us.v10/src/core2/code_72060.c.o(.rodata*);
-        build/us.v10/src/core2/code_73640.c.o(.rodata*);
-        build/us.v10/src/core2/code_74420.c.o(.rodata*);
-        build/us.v10/src/core2/fx/common2score.c.o(.rodata*);
-        build/us.v10/src/core2/fx/honeycarrierscore.c.o(.rodata*);
-        build/us.v10/src/core2/fx/jinjoscore.c.o(.rodata*);
-        build/us.v10/src/core2/fx/jinjoscore.c.o(.rodata*);
-        build/us.v10/src/core2/fx/common3score.c.o(.rodata*);
-        build/us.v10/src/core2/fx/healthscore.c.o(.rodata*);
-        build/us.v10/src/core2/fx/airscore.c.o(.rodata*);
-        build/us.v10/src/core2/code_7AF80.c.o(.rodata*);
-        build/us.v10/src/core2/mapModel.c.o(.rodata*);
-        build/us.v10/src/core2/code_83340.c.o(.rodata*);
-        build/us.v10/src/core2/gc/section.c.o(.rodata*);
-        build/us.v10/src/core2/gc/sky.c.o(.rodata*);
-        build/us.v10/src/core2/gc/transition.c.o(.rodata*);
-        build/us.v10/src/core2/code_85800.c.o(.rodata*);
-        build/us.v10/src/core2/gc/dialog.c.o(.rodata*);
-        build/us.v10/src/core2/gc/pauseMenu.c.o(.rodata*);
-        build/us.v10/src/core2/gc/zoombox.c.o(.rodata*);
-        build/us.v10/src/core2/code_91E10.c.o(.rodata*);
-        build/us.v10/src/core2/code_935F0.c.o(.rodata*);
-        build/us.v10/src/core2/gc/parade.c.o(.rodata*);
-        build/us.v10/src/core2/code_94A20.c.o(.rodata*);
-        build/us.v10/src/core2/code_956B0.c.o(.rodata*);
-        build/us.v10/src/core2/code_9A9D0.c.o(.rodata*);
-        build/us.v10/src/core2/code_9B180.c.o(.rodata*);
-        build/us.v10/src/core2/code_9C170.c.o(.rodata*);
-        build/us.v10/src/core2/code_9E370.c.o(.rodata*);
-        build/us.v10/src/core2/code_A4D00.c.o(.rodata*);
-        build/us.v10/src/core2/code_A5BC0.c.o(.rodata*);
-        build/us.v10/src/core2/code_AD110.c.o(.rodata*);
-        build/us.v10/src/core2/skeletalanim.c.o(.rodata*);
-        build/us.v10/src/core2/code_AEDA0.c.o(.rodata*);
-        build/us.v10/src/core2/modelRender.c.o(.rodata*);
-        build/us.v10/src/core2/code_B3A80.c.o(.rodata*);
-        build/us.v10/src/core2/string.c.o(.rodata*);
-        build/us.v10/src/core2/code_B6C60.c.o(.rodata*);
-        build/us.v10/src/core2/code_B6CE0.c.o(.rodata*);
-        build/us.v10/src/core2/code_B9090.c.o(.rodata*);
-        build/us.v10/src/core2/code_B9770.c.o(.rodata*);
-        build/us.v10/src/core2/code_BD100.c.o(.rodata*);
-        build/us.v10/src/core2/code_BDCC0.c.o(.rodata*);
-        build/us.v10/src/core2/code_BE2C0.c.o(.rodata*);
-        build/us.v10/src/core2/code_BEF20.c.o(.rodata*);
-        build/us.v10/src/core2/code_C0E60.c.o(.rodata*);
-        build/us.v10/src/core2/rand.c.o(.rodata*);
-        build/us.v10/src/core2/code_C3A40.c.o(.rodata*);
-        build/us.v10/src/core2/code_C4320.c.o(.rodata*);
-        build/us.v10/src/core2/code_C5AF0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C5CC0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C5F00.c.o(.rodata*);
-        build/us.v10/src/core2/code_C62B0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C76D0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C7CC0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C8230.c.o(.rodata*);
-        build/us.v10/src/core2/code_C8360.c.o(.rodata*);
-        build/us.v10/src/core2/code_C8490.c.o(.rodata*);
-        build/us.v10/src/core2/code_C8760.c.o(.rodata*);
-        build/us.v10/src/core2/code_C89C0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C97F0.c.o(.rodata*);
-        build/us.v10/src/core2/code_C9F00.c.o(.rodata*);
-        build/us.v10/src/core2/code_CB050.c.o(.rodata*);
-        build/us.v10/src/core2/code_CB610.c.o(.rodata*);
-        build/us.v10/src/core2/code_CBD10.c.o(.rodata*);
-        build/us.v10/src/core2/code_CC1E0.c.o(.rodata*);
-        build/us.v10/src/core2/code_CD0A0.c.o(.rodata*);
-        build/us.v10/src/core2/code_CD3F0.c.o(.rodata*);
-        build/us.v10/src/core2/code_CD6E0.c.o(.rodata*);
-        build/us.v10/src/core2/code_CECD0.c.o(.rodata*);
-        build/us.v10/src/core2/code_CF090.c.o(.rodata*);
-        build/us.v10/src/core2/ch/clankerwhipcrack.c.o(.rodata*);
-        build/us.v10/src/core2/ch/code_CFA60.c.o(.rodata*);
-        build/us.v10/src/core2/ch/clucker.c.o(.rodata*);
-        build/us.v10/src/core2/code_D0CA0.c.o(.rodata*);
-        build/us.v10/src/core2/code_D2180.c.o(.rodata*);
-        build/us.v10/src/core2/ch/firefx.c.o(.rodata*);
-        build/us.v10/src/core2/ch/drips.c.o(.rodata*);
-        build/us.v10/src/core2/ch/icecube.c.o(.rodata*);
-        build/us.v10/src/core2/ch/ghost.c.o(.rodata*);
-        build/us.v10/src/core2/ch/flotsam.c.o(.rodata*);
-        build/us.v10/src/core2/code_D5D10.c.o(.rodata*);
-        build/us.v10/src/core2/code_D6180.c.o(.rodata*);
-        build/us.v10/src/core2/code_D6600.c.o(.rodata*);
-        build/us.v10/src/core2/ch/termite.c.o(.rodata*);
-        build/us.v10/src/core2/ch/gravestone.c.o(.rodata*);
-        build/us.v10/src/core2/code_D89E0.c.o(.rodata*);
-        build/us.v10/src/core2/code_D89E0.c.o(.rodata*);
-        build/us.v10/src/core2/ch/whipcrack.c.o(.rodata*);
-        build/us.v10/src/core2/code_DA3A0.c.o(.rodata*);
-        build/us.v10/src/core2/code_DA760.c.o(.rodata*);
-        build/us.v10/src/core2/code_DB010.c.o(.rodata*);
-        build/us.v10/src/core2/code_2240.c.o(.rodata*)
-        build/us.v10/src/core2/code_8DA0.c.o(.rodata*)
-        build/us.v10/src/core2/code_A600.c.o(.rodata*)
-        build/us.v10/src/core2/code_A960.c.o(.rodata*)
-        build/us.v10/src/core2/eggshatter.c.o(.rodata*)
-        build/us.v10/src/core2/code_EE40.c.o(.rodata*)
-        build/us.v10/src/core2/code_13A00.c.o(.rodata*)
-        build/us.v10/src/core2/bs/bee.c.o(.rodata*)
-        build/us.v10/src/core2/bs/sled.c.o(.rodata*)
-        build/us.v10/src/core2/bs/splat.c.o(.rodata*)
-        build/us.v10/src/core2/code_33310.c.o(.rodata*)
-        build/us.v10/src/core2/code_336F0.c.o(.rodata*)
-        build/us.v10/src/core2/code_33C30.c.o(.rodata*)
-        build/us.v10/src/core2/code_379B0.c.o(.rodata*)
-        build/us.v10/src/core2/nc/randomCamera.c.o(.rodata*)
-        build/us.v10/src/core2/nc/dynamicCam11.c.o(.rodata*)
-        build/us.v10/src/core2/nc/dynamicCam8.c.o(.rodata*)
-        build/us.v10/src/core2/nc/dynamicCam1.c.o(.rodata*)
-        build/us.v10/src/core2/code_3B2C0.c.o(.rodata*)
-        build/us.v10/src/core2/nc/dynamicCamF.c.o(.rodata*)
-        build/us.v10/src/core2/nc/firstpersoncamera.c.o(.rodata*)
-        build/us.v10/src/core2/code_3EAD0.c.o(.rodata*)
-        build/us.v10/src/core2/code_3EC30.c.o(.rodata*)
-        build/us.v10/src/core2/code_41F30.c.o(.rodata*)
-        build/us.v10/src/core2/code_43250.c.o(.rodata*)
-        build/us.v10/src/core2/code_43A40.c.o(.rodata*)
-        build/us.v10/src/core2/ch/code_468E0.c.o(.rodata*)
-        build/us.v10/src/core2/ch/soundsource.c.o(.rodata*)
-        build/us.v10/src/core2/code_4BE10.c.o(.rodata*)
-        build/us.v10/src/core2/ch/wadingboots.c.o(.rodata*)
-        build/us.v10/src/core2/ch/collectible.c.o(.rodata*)
-        build/us.v10/src/core2/ch/molehill.c.o(.rodata*)
-        build/us.v10/src/core2/code_53A10.c.o(.rodata*)
-        build/us.v10/src/core2/code_55850.c.o(.rodata*)
-        build/us.v10/src/core2/code_59780.c.o(.rodata*)
-        build/us.v10/src/core2/ch/snowmanhat.c.o(.rodata*)
-        build/us.v10/src/core2/code_5DBC0.c.o(.rodata*)
-        build/us.v10/src/core2/code_637D0.c.o(.rodata*)
-        build/us.v10/src/core2/code_654C0.c.o(.rodata*)
-        build/us.v10/src/core2/code_66490.c.o(.rodata*)
-        build/us.v10/src/core2/code_66D90.c.o(.rodata*)
-        build/us.v10/src/core2/code_69F60.c.o(.rodata*)
-        build/us.v10/src/core2/code_6AEF0.c.o(.rodata*)
-        build/us.v10/src/core2/code_6CD20.c.o(.rodata*)
-        build/us.v10/src/core2/code_6D490.c.o(.rodata*)
-        build/us.v10/src/core2/code_72B10.c.o(.rodata*)
-        build/us.v10/src/core2/code_74290.c.o(.rodata*)
-        build/us.v10/src/core2/code_74910.c.o(.rodata*)
-        build/us.v10/src/core2/code_74ED0.c.o(.rodata*)
-        build/us.v10/src/core2/code_75480.c.o(.rodata*)
-        build/us.v10/src/core2/code_75930.c.o(.rodata*)
-        build/us.v10/src/core2/code_75E90.c.o(.rodata*)
-        build/us.v10/src/core2/fx/lifescore.c.o(.rodata*)
-        build/us.v10/src/core2/code_94780.c.o(.rodata*)
-        build/us.v10/src/core2/code_999A0.c.o(.rodata*)
-        build/us.v10/src/core2/timedfuncqueue.c.o(.rodata*)
-        build/us.v10/src/core2/code_ABC00.c.o(.rodata*)
-        build/us.v10/src/core2/code_AC520.c.o(.rodata*)
-        build/us.v10/src/core2/code_B3580.c.o(.rodata*)
-        build/us.v10/src/core2/code_B8860.c.o(.rodata*)
-        build/us.v10/src/core2/code_C0B80.c.o(.rodata*)
-        build/us.v10/src/core2/code_C0CF0.c.o(.rodata*)
-        build/us.v10/src/core2/code_C61C0.c.o(.rodata*)
-        build/us.v10/src/core2/code_D5FD0.c.o(.rodata*)
-        build/us.v10/src/core2/code_DAAA0.c.o(.rodata*)
-        build/us.v10/src/core2/code_DC4B0.c.o(.rodata*)
+        build/us.v10/src/core2/animctrl.c.o(.rodata);
+        build/us.v10/src/core2/anim/sprite.c.o(.rodata);
+        build/us.v10/src/core2/code_1930.c.o(.rodata);
+        build/us.v10/src/core2/ba/anim.c.o(.rodata);
+        build/us.v10/src/core2/snackerctl.c.o(.rodata);
+        build/us.v10/src/core2/code_39D0.c.o(.rodata);
+        build/us.v10/src/core2/ba/marker.c.o(.rodata);
+        build/us.v10/src/core2/code_6B30.c.o(.rodata);
+        build/us.v10/src/core2/code_7060.c.o(.rodata);
+        build/us.v10/src/core2/code_9450.c.o(.rodata);
+        build/us.v10/src/core2/code_9900.c.o(.rodata);
+        build/us.v10/src/core2/code_9BD0.c.o(.rodata);
+        build/us.v10/src/core2/ba/model.c.o(.rodata);
+        build/us.v10/src/core2/ba/drone.c.o(.rodata);
+        build/us.v10/src/core2/code_B850.c.o(.rodata);
+        build/us.v10/src/core2/code_BD20.c.o(.rodata);
+        build/us.v10/src/core2/ba/falldamage.c.o(.rodata);
+        build/us.v10/src/core2/code_C4B0.c.o(.rodata);
+        build/us.v10/src/core2/code_D9B0.c.o(.rodata);
+        build/us.v10/src/core2/abilityprogress.c.o(.rodata);
+        build/us.v10/src/core2/code_EF50.c.o(.rodata);
+        build/us.v10/src/core2/ba/physics.c.o(.rodata);
+        build/us.v10/src/core2/code_10CD0.c.o(.rodata);
+        build/us.v10/src/core2/pitch.c.o(.rodata);
+        build/us.v10/src/core2/code_11040.c.o(.rodata);
+        build/us.v10/src/core2/climb.c.o(.rodata);
+        build/us.v10/src/core2/code_11660.c.o(.rodata);
+        build/us.v10/src/core2/code_11870.c.o(.rodata);
+        build/us.v10/src/core2/roll.c.o(.rodata);
+        build/us.v10/src/core2/yaw.c.o(.rodata);
+        build/us.v10/src/core2/code_12360.c.o(.rodata);
+        build/us.v10/src/core2/code_126C0.c.o(.rodata);
+        build/us.v10/src/core2/code_12F30.c.o(.rodata);
+        build/us.v10/src/core2/code_13FC0.c.o(.rodata);
+        build/us.v10/src/core2/code_14420.c.o(.rodata);
+        build/us.v10/src/core2/code_16010.c.o(.rodata);
+        build/us.v10/src/core2/code_16C60.c.o(.rodata);
+        build/us.v10/src/core2/bs/ant.c.o(.rodata);
+        build/us.v10/src/core2/bs/bBarge.c.o(.rodata);
+        build/us.v10/src/core2/bs/bbuster.c.o(.rodata);
+        build/us.v10/src/core2/bs/beeFly.c.o(.rodata);
+        build/us.v10/src/core2/bs/beeMain.c.o(.rodata);
+        build/us.v10/src/core2/bs/bEggAss.c.o(.rodata);
+        build/us.v10/src/core2/bs/bEggHead.c.o(.rodata);
+        build/us.v10/src/core2/bs/bFlap.c.o(.rodata);
+        build/us.v10/src/core2/bs/bFlip.c.o(.rodata);
+        build/us.v10/src/core2/bs/bFly.c.o(.rodata);
+        build/us.v10/src/core2/bs/bLongLeg.c.o(.rodata);
+        build/us.v10/src/core2/bs/bPeck.c.o(.rodata);
+        build/us.v10/src/core2/bs/bShock.c.o(.rodata);
+        build/us.v10/src/core2/bs/bSwim.c.o(.rodata);
+        build/us.v10/src/core2/bs/bTrot.c.o(.rodata);
+        build/us.v10/src/core2/bs/bWhirl.c.o(.rodata);
+        build/us.v10/src/core2/bs/carry.c.o(.rodata);
+        build/us.v10/src/core2/bs/claw.c.o(.rodata);
+        build/us.v10/src/core2/bs/climb.c.o(.rodata);
+        build/us.v10/src/core2/bs/croc.c.o(.rodata);
+        build/us.v10/src/core2/bs/crouch.c.o(.rodata);
+        build/us.v10/src/core2/bs/die.c.o(.rodata);
+        build/us.v10/src/core2/bs/droneenter.c.o(.rodata);
+        build/us.v10/src/core2/bs/dronegoto.c.o(.rodata);
+        build/us.v10/src/core2/bs/dronelook.c.o(.rodata);
+        build/us.v10/src/core2/bs/dronevanish.c.o(.rodata);
+        build/us.v10/src/core2/bs/dronexform.c.o(.rodata);
+        build/us.v10/src/core2/bs/jig.c.o(.rodata);
+        build/us.v10/src/core2/bs/jump.c.o(.rodata);
+        build/us.v10/src/core2/bs/ow.c.o(.rodata);
+        build/us.v10/src/core2/bs/pumpkin.c.o(.rodata);
+        build/us.v10/src/core2/bs/rebound.c.o(.rodata);
+        build/us.v10/src/core2/bs/rest.c.o(.rodata);
+        build/us.v10/src/core2/bs/slide.c.o(.rodata);
+        build/us.v10/src/core2/bs/stand.c.o(.rodata);
+        build/us.v10/src/core2/bs/swim.c.o(.rodata);
+        build/us.v10/src/core2/bs/surf.c.o(.rodata);
+        build/us.v10/src/core2/bs/talk.c.o(.rodata);
+        build/us.v10/src/core2/bs/timeout.c.o(.rodata);
+        build/us.v10/src/core2/bs/throw.c.o(.rodata);
+        build/us.v10/src/core2/bs/turn.c.o(.rodata);
+        build/us.v10/src/core2/bs/twirl.c.o(.rodata);
+        build/us.v10/src/core2/bs/walk.c.o(.rodata);
+        build/us.v10/src/core2/bs/walrus.c.o(.rodata);
+        build/us.v10/src/core2/bs/washy.c.o(.rodata);
+        build/us.v10/src/core2/nc/cameranodelist.c.o(.rodata);
+        build/us.v10/src/core2/code_33F90.c.o(.rodata);
+        build/us.v10/src/core2/code_34310.c.o(.rodata);
+        build/us.v10/src/core2/code_34790.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCamera.c.o(.rodata);
+        build/us.v10/src/core2/code_37E50.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam10.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCamD.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam5.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam4.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCamC.c.o(.rodata);
+        build/us.v10/src/core2/code_F8EAF0.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCamB.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam13.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam9.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam12.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCam3.c.o(.rodata);
+        build/us.v10/src/core2/nc/dynamicCamA.c.o(.rodata);
+        build/us.v10/src/core2/spawnqueue.c.o(.rodata);
+        build/us.v10/src/core2/ch/gameSelect.c.o(.rodata);
+        build/us.v10/src/core2/ch/bubble.c.o(.rodata);
+        build/us.v10/src/core2/ch/bigbutt.c.o(.rodata);
+        build/us.v10/src/core2/code_400F0.c.o(.rodata);
+        build/us.v10/src/core2/ch/jiggy.c.o(.rodata);
+        build/us.v10/src/core2/ch/jigsawdance.c.o(.rodata);
+        build/us.v10/src/core2/code_41460.c.o(.rodata);
+        build/us.v10/src/core2/code_41FB0.c.o(.rodata);
+        build/us.v10/src/core2/ch/musicnote.c.o(.rodata);
+        build/us.v10/src/core2/code_42CB0.c.o(.rodata);
+        build/us.v10/src/core2/ch/trainers.c.o(.rodata);
+        build/us.v10/src/core2/code_43800.c.o(.rodata);
+        build/us.v10/src/core2/ch/crab.c.o(.rodata);
+        build/us.v10/src/core2/code_45310.c.o(.rodata);
+        build/us.v10/src/core2/ch/jinjo.c.o(.rodata);
+        build/us.v10/src/core2/ch/beehive.c.o(.rodata);
+        build/us.v10/src/core2/code_47BD0.c.o(.rodata);
+        build/us.v10/src/core2/ch/shrapnel.c.o(.rodata);
+        build/us.v10/src/core2/ch/gloop.c.o(.rodata);
+        build/us.v10/src/core2/code_4A6F0.c.o(.rodata);
+        build/us.v10/src/core2/code_4C020.c.o(.rodata);
+        build/us.v10/src/core2/ch/badShad.c.o(.rodata);
+        build/us.v10/src/core2/code_50490.c.o(.rodata);
+        build/us.v10/src/core2/code_509D0.c.o(.rodata);
+        build/us.v10/src/core2/code_517A0.c.o(.rodata);
+        build/us.v10/src/core2/code_51950.c.o(.rodata);
+        build/us.v10/src/core2/ch/mole.c.o(.rodata);
+        build/us.v10/src/core2/code_53C10.c.o(.rodata);
+        build/us.v10/src/core2/code_54D50.c.o(.rodata);
+        build/us.v10/src/core2/code_55180.c.o(.rodata);
+        build/us.v10/src/core2/code_55390.c.o(.rodata);
+        build/us.v10/src/core2/ch/overlaypressstart.c.o(.rodata);
+        build/us.v10/src/core2/ch/overlaynocontroller.c.o(.rodata);
+        build/us.v10/src/core2/ch/bottlesbonus.c.o(.rodata);
+        build/us.v10/src/core2/code_57C70.c.o(.rodata);
+        build/us.v10/src/core2/code_581D0.c.o(.rodata);
+        build/us.v10/src/core2/ch/bottlesbonuscursor.c.o(.rodata);
+        build/us.v10/src/core2/code_599E0.c.o(.rodata);
+        build/us.v10/src/core2/code_59A80.c.o(.rodata);
+        build/us.v10/src/core2/ch/snacker.c.o(.rodata);
+        build/us.v10/src/core2/ch/snowman.c.o(.rodata);
+        build/us.v10/src/core2/ch/snowball.c.o(.rodata);
+        build/us.v10/src/core2/code_5C240.c.o(.rodata);
+        build/us.v10/src/core2/code_5C870.c.o(.rodata);
+        build/us.v10/src/core2/code_5FD90.c.o(.rodata);
+        build/us.v10/src/core2/code_66FB0.c.o(.rodata);
+        build/us.v10/src/core2/code_67650.c.o(.rodata);
+        build/us.v10/src/core2/particle.c.o(.rodata);
+        build/us.v10/src/core2/code_6A4B0.c.o(.rodata);
+        build/us.v10/src/core2/code_6B030.c.o(.rodata);
+        build/us.v10/src/core2/fx/ripple.c.o(.rodata);
+        build/us.v10/src/core2/fx/sparkle.c.o(.rodata);
+        build/us.v10/src/core2/code_6CEC0.c.o(.rodata);
+        build/us.v10/src/core2/code_6D030.c.o(.rodata);
+        build/us.v10/src/core2/code_6D270.c.o(.rodata);
+        build/us.v10/src/core2/code_6DA30.c.o(.rodata);
+        build/us.v10/src/core2/code_70F20.c.o(.rodata);
+        build/us.v10/src/core2/code_71820.c.o(.rodata);
+        build/us.v10/src/core2/code_72060.c.o(.rodata);
+        build/us.v10/src/core2/code_73640.c.o(.rodata);
+        build/us.v10/src/core2/code_74420.c.o(.rodata);
+        build/us.v10/src/core2/fx/common2score.c.o(.rodata);
+        build/us.v10/src/core2/fx/honeycarrierscore.c.o(.rodata);
+        build/us.v10/src/core2/fx/jinjoscore.c.o(.rodata);
+        build/us.v10/src/core2/fx/jinjoscore.c.o(.rodata);
+        build/us.v10/src/core2/fx/common3score.c.o(.rodata);
+        build/us.v10/src/core2/fx/healthscore.c.o(.rodata);
+        build/us.v10/src/core2/fx/airscore.c.o(.rodata);
+        build/us.v10/src/core2/code_7AF80.c.o(.rodata);
+        build/us.v10/src/core2/mapModel.c.o(.rodata);
+        build/us.v10/src/core2/code_83340.c.o(.rodata);
+        build/us.v10/src/core2/gc/section.c.o(.rodata);
+        build/us.v10/src/core2/gc/sky.c.o(.rodata);
+        build/us.v10/src/core2/gc/transition.c.o(.rodata);
+        build/us.v10/src/core2/code_85800.c.o(.rodata);
+        build/us.v10/src/core2/gc/dialog.c.o(.rodata);
+        build/us.v10/src/core2/gc/pauseMenu.c.o(.rodata);
+        build/us.v10/src/core2/gc/zoombox.c.o(.rodata);
+        build/us.v10/src/core2/code_91E10.c.o(.rodata);
+        build/us.v10/src/core2/code_935F0.c.o(.rodata);
+        build/us.v10/src/core2/gc/parade.c.o(.rodata);
+        build/us.v10/src/core2/code_94A20.c.o(.rodata);
+        build/us.v10/src/core2/code_956B0.c.o(.rodata);
+        build/us.v10/src/core2/code_9A9D0.c.o(.rodata);
+        build/us.v10/src/core2/code_9B180.c.o(.rodata);
+        build/us.v10/src/core2/code_9C170.c.o(.rodata);
+        build/us.v10/src/core2/code_9E370.c.o(.rodata);
+        build/us.v10/src/core2/code_A4D00.c.o(.rodata);
+        build/us.v10/src/core2/code_A5BC0.c.o(.rodata);
+        build/us.v10/src/core2/code_AD110.c.o(.rodata);
+        build/us.v10/src/core2/skeletalanim.c.o(.rodata);
+        build/us.v10/src/core2/code_AEDA0.c.o(.rodata);
+        build/us.v10/src/core2/modelRender.c.o(.rodata);
+        build/us.v10/src/core2/code_B3A80.c.o(.rodata);
+        build/us.v10/src/core2/string.c.o(.rodata);
+        build/us.v10/src/core2/code_B6C60.c.o(.rodata);
+        build/us.v10/src/core2/code_B6CE0.c.o(.rodata);
+        build/us.v10/src/core2/code_B9090.c.o(.rodata);
+        build/us.v10/src/core2/code_B9770.c.o(.rodata);
+        build/us.v10/src/core2/code_BD100.c.o(.rodata);
+        build/us.v10/src/core2/code_BDCC0.c.o(.rodata);
+        build/us.v10/src/core2/code_BE2C0.c.o(.rodata);
+        build/us.v10/src/core2/code_BEF20.c.o(.rodata);
+        build/us.v10/src/core2/code_C0E60.c.o(.rodata);
+        build/us.v10/src/core2/rand.c.o(.rodata);
+        build/us.v10/src/core2/code_C3A40.c.o(.rodata);
+        build/us.v10/src/core2/code_C4320.c.o(.rodata);
+        build/us.v10/src/core2/code_C5AF0.c.o(.rodata);
+        build/us.v10/src/core2/code_C5CC0.c.o(.rodata);
+        build/us.v10/src/core2/code_C5F00.c.o(.rodata);
+        build/us.v10/src/core2/code_C62B0.c.o(.rodata);
+        build/us.v10/src/core2/code_C76D0.c.o(.rodata);
+        build/us.v10/src/core2/code_C7CC0.c.o(.rodata);
+        build/us.v10/src/core2/code_C8230.c.o(.rodata);
+        build/us.v10/src/core2/code_C8360.c.o(.rodata);
+        build/us.v10/src/core2/code_C8490.c.o(.rodata);
+        build/us.v10/src/core2/code_C8760.c.o(.rodata);
+        build/us.v10/src/core2/code_C89C0.c.o(.rodata);
+        build/us.v10/src/core2/code_C97F0.c.o(.rodata);
+        build/us.v10/src/core2/code_C9F00.c.o(.rodata);
+        build/us.v10/src/core2/code_CB050.c.o(.rodata);
+        build/us.v10/src/core2/code_CB610.c.o(.rodata);
+        build/us.v10/src/core2/code_CBD10.c.o(.rodata);
+        build/us.v10/src/core2/code_CC1E0.c.o(.rodata);
+        build/us.v10/src/core2/code_CD0A0.c.o(.rodata);
+        build/us.v10/src/core2/code_CD3F0.c.o(.rodata);
+        build/us.v10/src/core2/code_CD6E0.c.o(.rodata);
+        build/us.v10/src/core2/code_CECD0.c.o(.rodata);
+        build/us.v10/src/core2/code_CF090.c.o(.rodata);
+        build/us.v10/src/core2/ch/clankerwhipcrack.c.o(.rodata);
+        build/us.v10/src/core2/ch/code_CFA60.c.o(.rodata);
+        build/us.v10/src/core2/ch/clucker.c.o(.rodata);
+        build/us.v10/src/core2/code_D0CA0.c.o(.rodata);
+        build/us.v10/src/core2/code_D2180.c.o(.rodata);
+        build/us.v10/src/core2/ch/firefx.c.o(.rodata);
+        build/us.v10/src/core2/ch/drips.c.o(.rodata);
+        build/us.v10/src/core2/ch/icecube.c.o(.rodata);
+        build/us.v10/src/core2/ch/ghost.c.o(.rodata);
+        build/us.v10/src/core2/ch/flotsam.c.o(.rodata);
+        build/us.v10/src/core2/code_D5D10.c.o(.rodata);
+        build/us.v10/src/core2/code_D6180.c.o(.rodata);
+        build/us.v10/src/core2/code_D6600.c.o(.rodata);
+        build/us.v10/src/core2/ch/termite.c.o(.rodata);
+        build/us.v10/src/core2/ch/gravestone.c.o(.rodata);
+        build/us.v10/src/core2/code_D89E0.c.o(.rodata);
+        build/us.v10/src/core2/code_D89E0.c.o(.rodata);
+        build/us.v10/src/core2/ch/whipcrack.c.o(.rodata);
+        build/us.v10/src/core2/code_DA3A0.c.o(.rodata);
+        build/us.v10/src/core2/code_DA760.c.o(.rodata);
+        build/us.v10/src/core2/code_DB010.c.o(.rodata);
+        build/us.v10/src/core2/code_2240.c.o(.rodata)
+        build/us.v10/src/core2/code_8DA0.c.o(.rodata)
+        build/us.v10/src/core2/code_A600.c.o(.rodata)
+        build/us.v10/src/core2/code_A960.c.o(.rodata)
+        build/us.v10/src/core2/eggshatter.c.o(.rodata)
+        build/us.v10/src/core2/code_EE40.c.o(.rodata)
+        build/us.v10/src/core2/code_13A00.c.o(.rodata)
+        build/us.v10/src/core2/bs/bee.c.o(.rodata)
+        build/us.v10/src/core2/bs/sled.c.o(.rodata)
+        build/us.v10/src/core2/bs/splat.c.o(.rodata)
+        build/us.v10/src/core2/code_33310.c.o(.rodata)
+        build/us.v10/src/core2/code_336F0.c.o(.rodata)
+        build/us.v10/src/core2/code_33C30.c.o(.rodata)
+        build/us.v10/src/core2/code_379B0.c.o(.rodata)
+        build/us.v10/src/core2/nc/randomCamera.c.o(.rodata)
+        build/us.v10/src/core2/nc/dynamicCam11.c.o(.rodata)
+        build/us.v10/src/core2/nc/dynamicCam8.c.o(.rodata)
+        build/us.v10/src/core2/nc/dynamicCam1.c.o(.rodata)
+        build/us.v10/src/core2/code_3B2C0.c.o(.rodata)
+        build/us.v10/src/core2/nc/dynamicCamF.c.o(.rodata)
+        build/us.v10/src/core2/nc/firstpersoncamera.c.o(.rodata)
+        build/us.v10/src/core2/code_3EAD0.c.o(.rodata)
+        build/us.v10/src/core2/code_3EC30.c.o(.rodata)
+        build/us.v10/src/core2/code_41F30.c.o(.rodata)
+        build/us.v10/src/core2/code_43250.c.o(.rodata)
+        build/us.v10/src/core2/code_43A40.c.o(.rodata)
+        build/us.v10/src/core2/ch/code_468E0.c.o(.rodata)
+        build/us.v10/src/core2/ch/soundsource.c.o(.rodata)
+        build/us.v10/src/core2/code_4BE10.c.o(.rodata)
+        build/us.v10/src/core2/ch/wadingboots.c.o(.rodata)
+        build/us.v10/src/core2/ch/collectible.c.o(.rodata)
+        build/us.v10/src/core2/ch/molehill.c.o(.rodata)
+        build/us.v10/src/core2/code_53A10.c.o(.rodata)
+        build/us.v10/src/core2/code_55850.c.o(.rodata)
+        build/us.v10/src/core2/code_59780.c.o(.rodata)
+        build/us.v10/src/core2/ch/snowmanhat.c.o(.rodata)
+        build/us.v10/src/core2/code_5DBC0.c.o(.rodata)
+        build/us.v10/src/core2/code_637D0.c.o(.rodata)
+        build/us.v10/src/core2/code_654C0.c.o(.rodata)
+        build/us.v10/src/core2/code_66490.c.o(.rodata)
+        build/us.v10/src/core2/code_66D90.c.o(.rodata)
+        build/us.v10/src/core2/code_69F60.c.o(.rodata)
+        build/us.v10/src/core2/code_6AEF0.c.o(.rodata)
+        build/us.v10/src/core2/code_6CD20.c.o(.rodata)
+        build/us.v10/src/core2/code_6D490.c.o(.rodata)
+        build/us.v10/src/core2/code_72B10.c.o(.rodata)
+        build/us.v10/src/core2/code_74290.c.o(.rodata)
+        build/us.v10/src/core2/code_74910.c.o(.rodata)
+        build/us.v10/src/core2/code_74ED0.c.o(.rodata)
+        build/us.v10/src/core2/code_75480.c.o(.rodata)
+        build/us.v10/src/core2/code_75930.c.o(.rodata)
+        build/us.v10/src/core2/code_75E90.c.o(.rodata)
+        build/us.v10/src/core2/fx/lifescore.c.o(.rodata)
+        build/us.v10/src/core2/code_94780.c.o(.rodata)
+        build/us.v10/src/core2/code_999A0.c.o(.rodata)
+        build/us.v10/src/core2/timedfuncqueue.c.o(.rodata)
+        build/us.v10/src/core2/code_ABC00.c.o(.rodata)
+        build/us.v10/src/core2/code_AC520.c.o(.rodata)
+        build/us.v10/src/core2/code_B3580.c.o(.rodata)
+        build/us.v10/src/core2/code_B8860.c.o(.rodata)
+        build/us.v10/src/core2/code_C0B80.c.o(.rodata)
+        build/us.v10/src/core2/code_C0CF0.c.o(.rodata)
+        build/us.v10/src/core2/code_C61C0.c.o(.rodata)
+        build/us.v10/src/core2/code_D5FD0.c.o(.rodata)
+        build/us.v10/src/core2/code_DAAA0.c.o(.rodata)
+        build/us.v10/src/core2/code_DC4B0.c.o(.rodata)
 
         core2_RODATA_END = .;
         core2_RODATA_SIZE = ABSOLUTE(core2_RODATA_END - core2_RODATA_START);
@@ -2179,11 +2173,11 @@ SECTIONS
         CC_DATA_END = .;
         CC_DATA_SIZE = ABSOLUTE(CC_DATA_END - CC_DATA_START);
         CC_RODATA_START = .;
-        build/us.v10/src/CC/code_0.c.o(.rodata*);
-        build/us.v10/src/CC/code_530.c.o(.rodata*);
-        build/us.v10/src/CC/ch/tooth.c.o(.rodata*);
-        build/us.v10/src/CC/code_1B90.c.o(.rodata*);
-        build/us.v10/src/CC/code_1F70.c.o(.rodata*);
+        build/us.v10/src/CC/code_0.c.o(.rodata);
+        build/us.v10/src/CC/code_530.c.o(.rodata);
+        build/us.v10/src/CC/ch/tooth.c.o(.rodata);
+        build/us.v10/src/CC/code_1B90.c.o(.rodata);
+        build/us.v10/src/CC/code_1F70.c.o(.rodata);
         CC_RODATA_END = .;
         CC_RODATA_SIZE = ABSOLUTE(CC_RODATA_END - CC_RODATA_START);
     }
@@ -2305,25 +2299,25 @@ SECTIONS
         GV_DATA_END = .;
         GV_DATA_SIZE = ABSOLUTE(GV_DATA_END - GV_DATA_START);
         GV_RODATA_START = .;
-        build/us.v10/src/GV/ch/ancientone.c.o(.rodata*);
-        build/us.v10/src/GV/ch/gobi1.c.o(.rodata*);
-        build/us.v10/src/GV/ch/gobi2.c.o(.rodata*);
-        build/us.v10/src/GV/ch/gobi3.c.o(.rodata*);
-        build/us.v10/src/GV/ch/gobirock.c.o(.rodata*);
-        build/us.v10/src/GV/ch/sarcophagus.c.o(.rodata*);
-        build/us.v10/src/GV/code_3BB0.c.o(.rodata*);
-        build/us.v10/src/GV/code_3D90.c.o(.rodata*);
-        build/us.v10/src/GV/code_43B0.c.o(.rodata*);
-        build/us.v10/src/GV/code_4740.c.o(.rodata*);
-        build/us.v10/src/GV/code_5570.c.o(.rodata*);
-        build/us.v10/src/GV/code_6370.c.o(.rodata*);
-        build/us.v10/src/GV/code_7060.c.o(.rodata*);
-        build/us.v10/src/GV/ch/histup.c.o(.rodata*);
-        build/us.v10/src/GV/code_7FF0.c.o(.rodata*);
-        build/us.v10/src/GV/ch/mazectrl.c.o(.rodata*);
-        build/us.v10/src/GV/ch/buriedpyramid.c.o(.rodata*);
-        build/us.v10/src/GV/matchinggame.c.o(.rodata*);
-        build/us.v10/src/GV/waterctrl.c.o(.rodata*);
+        build/us.v10/src/GV/ch/ancientone.c.o(.rodata);
+        build/us.v10/src/GV/ch/gobi1.c.o(.rodata);
+        build/us.v10/src/GV/ch/gobi2.c.o(.rodata);
+        build/us.v10/src/GV/ch/gobi3.c.o(.rodata);
+        build/us.v10/src/GV/ch/gobirock.c.o(.rodata);
+        build/us.v10/src/GV/ch/sarcophagus.c.o(.rodata);
+        build/us.v10/src/GV/code_3BB0.c.o(.rodata);
+        build/us.v10/src/GV/code_3D90.c.o(.rodata);
+        build/us.v10/src/GV/code_43B0.c.o(.rodata);
+        build/us.v10/src/GV/code_4740.c.o(.rodata);
+        build/us.v10/src/GV/code_5570.c.o(.rodata);
+        build/us.v10/src/GV/code_6370.c.o(.rodata);
+        build/us.v10/src/GV/code_7060.c.o(.rodata);
+        build/us.v10/src/GV/ch/histup.c.o(.rodata);
+        build/us.v10/src/GV/code_7FF0.c.o(.rodata);
+        build/us.v10/src/GV/ch/mazectrl.c.o(.rodata);
+        build/us.v10/src/GV/ch/buriedpyramid.c.o(.rodata);
+        build/us.v10/src/GV/matchinggame.c.o(.rodata);
+        build/us.v10/src/GV/waterctrl.c.o(.rodata);
         GV_RODATA_END = .;
         GV_RODATA_SIZE = ABSOLUTE(GV_RODATA_END - GV_RODATA_START);
     }
@@ -2399,16 +2393,16 @@ SECTIONS
         MMM_DATA_END = .;
         MMM_DATA_SIZE = ABSOLUTE(MMM_DATA_END - MMM_DATA_START);
         MMM_RODATA_START = .;
-        build/us.v10/src/MMM/ch/loggo.c.o(.rodata*);
-        build/us.v10/src/MMM/ch/napper.c.o(.rodata*);
-        build/us.v10/src/MMM/ch/motzhand.c.o(.rodata*);
-        build/us.v10/src/MMM/code_16B0.c.o(.rodata*);
-        build/us.v10/src/MMM/code_2040.c.o(.rodata*);
-        build/us.v10/src/MMM/code_3120.c.o(.rodata*);
-        build/us.v10/src/MMM/code_3420.c.o(.rodata*);
-        build/us.v10/src/MMM/code_3D50.c.o(.rodata*);
-        build/us.v10/src/MMM/code_47D0.c.o(.rodata*);
-        build/us.v10/src/MMM/code_5000.c.o(.rodata*);
+        build/us.v10/src/MMM/ch/loggo.c.o(.rodata);
+        build/us.v10/src/MMM/ch/napper.c.o(.rodata);
+        build/us.v10/src/MMM/ch/motzhand.c.o(.rodata);
+        build/us.v10/src/MMM/code_16B0.c.o(.rodata);
+        build/us.v10/src/MMM/code_2040.c.o(.rodata);
+        build/us.v10/src/MMM/code_3120.c.o(.rodata);
+        build/us.v10/src/MMM/code_3420.c.o(.rodata);
+        build/us.v10/src/MMM/code_3D50.c.o(.rodata);
+        build/us.v10/src/MMM/code_47D0.c.o(.rodata);
+        build/us.v10/src/MMM/code_5000.c.o(.rodata);
         MMM_RODATA_END = .;
         MMM_RODATA_SIZE = ABSOLUTE(MMM_RODATA_END - MMM_RODATA_START);
     }
@@ -2470,15 +2464,15 @@ SECTIONS
         TTC_DATA_END = .;
         TTC_DATA_SIZE = ABSOLUTE(TTC_DATA_END - TTC_DATA_START);
         TTC_RODATA_START = .;
-        build/us.v10/src/TTC/ch/clam.c.o(.rodata*);
-        build/us.v10/src/TTC/ch/blubber.c.o(.rodata*);
-        build/us.v10/src/TTC/ch/nipper.c.o(.rodata*);
-        build/us.v10/src/TTC/code_26D0.c.o(.rodata*);
-        build/us.v10/src/TTC/ch/leaky.c.o(.rodata*);
-        build/us.v10/src/TTC/ch/lockup.c.o(.rodata*);
-        build/us.v10/src/TTC/ch/treasurehunt.c.o(.rodata*);
-        build/us.v10/src/TTC/code_3E30.c.o(.rodata*);
-        build/us.v10/src/TTC/ch/treasure.c.o(.rodata*);
+        build/us.v10/src/TTC/ch/clam.c.o(.rodata);
+        build/us.v10/src/TTC/ch/blubber.c.o(.rodata);
+        build/us.v10/src/TTC/ch/nipper.c.o(.rodata);
+        build/us.v10/src/TTC/code_26D0.c.o(.rodata);
+        build/us.v10/src/TTC/ch/leaky.c.o(.rodata);
+        build/us.v10/src/TTC/ch/lockup.c.o(.rodata);
+        build/us.v10/src/TTC/ch/treasurehunt.c.o(.rodata);
+        build/us.v10/src/TTC/code_3E30.c.o(.rodata);
+        build/us.v10/src/TTC/ch/treasure.c.o(.rodata);
         TTC_RODATA_END = .;
         TTC_RODATA_SIZE = ABSOLUTE(TTC_RODATA_END - TTC_RODATA_START);
     }
@@ -2539,14 +2533,14 @@ SECTIONS
         MM_DATA_END = .;
         MM_DATA_SIZE = ABSOLUTE(MM_DATA_END - MM_DATA_START);
         MM_RODATA_START = .;
-        build/us.v10/src/MM/ch/orangepad.c.o(.rodata*);
-        build/us.v10/src/MM/ch/hut.c.o(.rodata*);
-        build/us.v10/src/MM/ch/conga.c.o(.rodata*);
-        build/us.v10/src/MM/ch/orange.c.o(.rodata*);
-        build/us.v10/src/MM/ch/lmonkey.c.o(.rodata*);
-        build/us.v10/src/MM/ch/grublin.c.o(.rodata*);
-        build/us.v10/src/MM/ch/jujuhitbox.c.o(.rodata*);
-        build/us.v10/src/MM/ch/juju.c.o(.rodata*);
+        build/us.v10/src/MM/ch/orangepad.c.o(.rodata);
+        build/us.v10/src/MM/ch/hut.c.o(.rodata);
+        build/us.v10/src/MM/ch/conga.c.o(.rodata);
+        build/us.v10/src/MM/ch/orange.c.o(.rodata);
+        build/us.v10/src/MM/ch/lmonkey.c.o(.rodata);
+        build/us.v10/src/MM/ch/grublin.c.o(.rodata);
+        build/us.v10/src/MM/ch/jujuhitbox.c.o(.rodata);
+        build/us.v10/src/MM/ch/juju.c.o(.rodata);
         MM_RODATA_END = .;
         MM_RODATA_SIZE = ABSOLUTE(MM_RODATA_END - MM_RODATA_START);
     }
@@ -2626,20 +2620,20 @@ SECTIONS
         BGS_DATA_END = .;
         BGS_DATA_SIZE = ABSOLUTE(BGS_DATA_END - BGS_DATA_START);
         BGS_RODATA_START = .;
-        build/us.v10/src/BGS/ch/flibbit.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/croctus.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/code_2270.c.o(.rodata*);
-        build/us.v10/src/BGS/code_3030.c.o(.rodata*);
-        build/us.v10/src/BGS/code_3420.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/yumblie.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/mrvile.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/frogminigame.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/yellowflibbit.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/mudhut.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/code_8A60.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/tanktup.c.o(.rodata*);
-        build/us.v10/src/BGS/code_9750.c.o(.rodata*);
-        build/us.v10/src/BGS/ch/leafboat.c.o(.rodata*);
+        build/us.v10/src/BGS/ch/flibbit.c.o(.rodata);
+        build/us.v10/src/BGS/ch/croctus.c.o(.rodata);
+        build/us.v10/src/BGS/ch/code_2270.c.o(.rodata);
+        build/us.v10/src/BGS/code_3030.c.o(.rodata);
+        build/us.v10/src/BGS/code_3420.c.o(.rodata);
+        build/us.v10/src/BGS/ch/yumblie.c.o(.rodata);
+        build/us.v10/src/BGS/ch/mrvile.c.o(.rodata);
+        build/us.v10/src/BGS/ch/frogminigame.c.o(.rodata);
+        build/us.v10/src/BGS/ch/yellowflibbit.c.o(.rodata);
+        build/us.v10/src/BGS/ch/mudhut.c.o(.rodata);
+        build/us.v10/src/BGS/ch/code_8A60.c.o(.rodata);
+        build/us.v10/src/BGS/ch/tanktup.c.o(.rodata);
+        build/us.v10/src/BGS/code_9750.c.o(.rodata);
+        build/us.v10/src/BGS/ch/leafboat.c.o(.rodata);
         BGS_RODATA_END = .;
         BGS_RODATA_SIZE = ABSOLUTE(BGS_RODATA_END - BGS_RODATA_START);
     }
@@ -2750,24 +2744,24 @@ SECTIONS
         RBB_DATA_END = .;
         RBB_DATA_SIZE = ABSOLUTE(RBB_DATA_END - RBB_DATA_START);
         RBB_RODATA_START = .;
-        build/us.v10/src/RBB/code_640.c.o(.rodata*);
-        build/us.v10/src/RBB/code_CA0.c.o(.rodata*);
-        build/us.v10/src/RBB/code_1570.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/grimlet.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/axle.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/enginefanswitch.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/propellor.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/propellorswitch.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/whistle.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/whistlectrl.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/dolphin.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/anchor.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/anchorctrl.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/bossboombox.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/bellbuoy.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/rowboat.c.o(.rodata*);
-        build/us.v10/src/RBB/ch/boombox.c.o(.rodata*);
-        build/us.v10/src/RBB/code_9670.c.o(.rodata*);
+        build/us.v10/src/RBB/code_640.c.o(.rodata);
+        build/us.v10/src/RBB/code_CA0.c.o(.rodata);
+        build/us.v10/src/RBB/code_1570.c.o(.rodata);
+        build/us.v10/src/RBB/ch/grimlet.c.o(.rodata);
+        build/us.v10/src/RBB/ch/axle.c.o(.rodata);
+        build/us.v10/src/RBB/ch/enginefanswitch.c.o(.rodata);
+        build/us.v10/src/RBB/ch/propellor.c.o(.rodata);
+        build/us.v10/src/RBB/ch/propellorswitch.c.o(.rodata);
+        build/us.v10/src/RBB/ch/whistle.c.o(.rodata);
+        build/us.v10/src/RBB/ch/whistlectrl.c.o(.rodata);
+        build/us.v10/src/RBB/ch/dolphin.c.o(.rodata);
+        build/us.v10/src/RBB/ch/anchor.c.o(.rodata);
+        build/us.v10/src/RBB/ch/anchorctrl.c.o(.rodata);
+        build/us.v10/src/RBB/ch/bossboombox.c.o(.rodata);
+        build/us.v10/src/RBB/ch/bellbuoy.c.o(.rodata);
+        build/us.v10/src/RBB/ch/rowboat.c.o(.rodata);
+        build/us.v10/src/RBB/ch/boombox.c.o(.rodata);
+        build/us.v10/src/RBB/code_9670.c.o(.rodata);
         RBB_RODATA_END = .;
         RBB_RODATA_SIZE = ABSOLUTE(RBB_RODATA_END - RBB_RODATA_START);
     }
@@ -2879,22 +2873,22 @@ SECTIONS
         FP_DATA_END = .;
         FP_DATA_SIZE = ABSOLUTE(FP_DATA_END - FP_DATA_START);
         FP_RODATA_START = .;
-        build/us.v10/src/FP/ch/scarfsled.c.o(.rodata*);
-        build/us.v10/src/FP/ch/xmastree.c.o(.rodata*);
-        build/us.v10/src/FP/ch/boggy1.c.o(.rodata*);
-        build/us.v10/src/FP/code_19E0.c.o(.rodata*);
-        build/us.v10/src/FP/code_1FF0.c.o(.rodata*);
-        build/us.v10/src/FP/ch/boggy2.c.o(.rodata*);
-        build/us.v10/src/FP/ch/bearcub.c.o(.rodata*);
-        build/us.v10/src/FP/racectrl.c.o(.rodata*);
-        build/us.v10/src/FP/ch/twinkly.c.o(.rodata*);
-        build/us.v10/src/FP/ch/twinklybox.c.o(.rodata*);
-        build/us.v10/src/FP/ch/twinklymuncher.c.o(.rodata*);
-        build/us.v10/src/FP/ch/xmastreestar.c.o(.rodata*);
-        build/us.v10/src/FP/ch/wozza.c.o(.rodata*);
-        build/us.v10/src/FP/ch/wozzasjig.c.o(.rodata*);
-        build/us.v10/src/FP/ch/xmastreeice.c.o(.rodata*);
-        build/us.v10/src/FP/ch/xmastreeeggtoll.c.o(.rodata*);
+        build/us.v10/src/FP/ch/scarfsled.c.o(.rodata);
+        build/us.v10/src/FP/ch/xmastree.c.o(.rodata);
+        build/us.v10/src/FP/ch/boggy1.c.o(.rodata);
+        build/us.v10/src/FP/code_19E0.c.o(.rodata);
+        build/us.v10/src/FP/code_1FF0.c.o(.rodata);
+        build/us.v10/src/FP/ch/boggy2.c.o(.rodata);
+        build/us.v10/src/FP/ch/bearcub.c.o(.rodata);
+        build/us.v10/src/FP/racectrl.c.o(.rodata);
+        build/us.v10/src/FP/ch/twinkly.c.o(.rodata);
+        build/us.v10/src/FP/ch/twinklybox.c.o(.rodata);
+        build/us.v10/src/FP/ch/twinklymuncher.c.o(.rodata);
+        build/us.v10/src/FP/ch/xmastreestar.c.o(.rodata);
+        build/us.v10/src/FP/ch/wozza.c.o(.rodata);
+        build/us.v10/src/FP/ch/wozzasjig.c.o(.rodata);
+        build/us.v10/src/FP/ch/xmastreeice.c.o(.rodata);
+        build/us.v10/src/FP/ch/xmastreeeggtoll.c.o(.rodata);
         FP_RODATA_END = .;
         FP_RODATA_SIZE = ABSOLUTE(FP_RODATA_END - FP_RODATA_START);
     }
@@ -2960,11 +2954,11 @@ SECTIONS
         SM_DATA_END = .;
         SM_DATA_SIZE = ABSOLUTE(SM_DATA_END - SM_DATA_START);
         SM_RODATA_START = .;
-        build/us.v10/src/SM/code_5B0.c.o(.rodata*);
-        build/us.v10/src/SM/ch/attacktutorial.c.o(.rodata*);
-        build/us.v10/src/SM/ch/vegetables.c.o(.rodata*);
-        build/us.v10/src/SM/code_2990.c.o(.rodata*);
-        build/us.v10/src/SM/code_44D0.c.o(.rodata*);
+        build/us.v10/src/SM/code_5B0.c.o(.rodata);
+        build/us.v10/src/SM/ch/attacktutorial.c.o(.rodata);
+        build/us.v10/src/SM/ch/vegetables.c.o(.rodata);
+        build/us.v10/src/SM/code_2990.c.o(.rodata);
+        build/us.v10/src/SM/code_44D0.c.o(.rodata);
         SM_RODATA_END = .;
         SM_RODATA_SIZE = ABSOLUTE(SM_RODATA_END - SM_RODATA_START);
     }
@@ -3007,10 +3001,10 @@ SECTIONS
         cutscenes_DATA_END = .;
         cutscenes_DATA_SIZE = ABSOLUTE(cutscenes_DATA_END - cutscenes_DATA_START);
         cutscenes_RODATA_START = .;
-        build/us.v10/src/cutscenes/code_0.c.o(.rodata*);
-        build/us.v10/src/cutscenes/code_6730.c.o(.rodata*);
-        build/us.v10/src/cutscenes/code_69F0.c.o(.rodata*);
-        build/us.v10/src/cutscenes/code_6C90.c.o(.rodata*);
+        build/us.v10/src/cutscenes/code_0.c.o(.rodata);
+        build/us.v10/src/cutscenes/code_6730.c.o(.rodata);
+        build/us.v10/src/cutscenes/code_69F0.c.o(.rodata);
+        build/us.v10/src/cutscenes/code_6C90.c.o(.rodata);
         cutscenes_RODATA_END = .;
         cutscenes_RODATA_SIZE = ABSOLUTE(cutscenes_RODATA_END - cutscenes_RODATA_START);
     }
@@ -3080,18 +3074,18 @@ SECTIONS
         lair_DATA_END = .;
         lair_DATA_SIZE = ABSOLUTE(lair_DATA_END - lair_DATA_START);
         lair_RODATA_START = .;
-        build/us.v10/src/lair/code_0.c.o(.rodata*);
-        build/us.v10/src/lair/ch/cauldron.c.o(.rodata*);
-        build/us.v10/src/lair/ch/brentilda.c.o(.rodata*);
-        build/us.v10/src/lair/code_5ED0.c.o(.rodata*);
-        build/us.v10/src/lair/code_86F0.c.o(.rodata*);
-        build/us.v10/src/lair/code_9C40.c.o(.rodata*);
-        build/us.v10/src/lair/code_A4A0.c.o(.rodata*);
-        build/us.v10/src/lair/code_A810.c.o(.rodata*);
-        build/us.v10/src/lair/code_AD70.c.o(.rodata*);
-        build/us.v10/src/lair/code_BBD0.c.o(.rodata*);
-        build/us.v10/src/lair/code_C1C0.c.o(.rodata*);
-        build/us.v10/src/lair/code_C6C0.c.o(.rodata*);
+        build/us.v10/src/lair/code_0.c.o(.rodata);
+        build/us.v10/src/lair/ch/cauldron.c.o(.rodata);
+        build/us.v10/src/lair/ch/brentilda.c.o(.rodata);
+        build/us.v10/src/lair/code_5ED0.c.o(.rodata);
+        build/us.v10/src/lair/code_86F0.c.o(.rodata);
+        build/us.v10/src/lair/code_9C40.c.o(.rodata);
+        build/us.v10/src/lair/code_A4A0.c.o(.rodata);
+        build/us.v10/src/lair/code_A810.c.o(.rodata);
+        build/us.v10/src/lair/code_AD70.c.o(.rodata);
+        build/us.v10/src/lair/code_BBD0.c.o(.rodata);
+        build/us.v10/src/lair/code_C1C0.c.o(.rodata);
+        build/us.v10/src/lair/code_C6C0.c.o(.rodata);
         lair_RODATA_END = .;
         lair_RODATA_SIZE = ABSOLUTE(lair_RODATA_END - lair_RODATA_START);
     }
@@ -3152,16 +3146,16 @@ SECTIONS
         fight_DATA_END = .;
         fight_DATA_SIZE = ABSOLUTE(fight_DATA_END - fight_DATA_START);
         fight_RODATA_START = .;
-        build/us.v10/src/fight/chfinalboss.c.o(.rodata*);
-        build/us.v10/src/fight/chbossjinjo.c.o(.rodata*);
-        build/us.v10/src/fight/chbossjinjobase.c.o(.rodata*);
-        build/us.v10/src/fight/chstonejinjo.c.o(.rodata*);
-        build/us.v10/src/fight/chjinjonatorbase.c.o(.rodata*);
-        build/us.v10/src/fight/chspellbarrier.c.o(.rodata*);
-        build/us.v10/src/fight/chspellfireball.c.o(.rodata*);
-        build/us.v10/src/fight/chgreenblast.c.o(.rodata*);
-        build/us.v10/src/fight/chjinjonator.c.o(.rodata*);
-        build/us.v10/src/fight/chbossshadow.c.o(.rodata*);
+        build/us.v10/src/fight/chfinalboss.c.o(.rodata);
+        build/us.v10/src/fight/chbossjinjo.c.o(.rodata);
+        build/us.v10/src/fight/chbossjinjobase.c.o(.rodata);
+        build/us.v10/src/fight/chstonejinjo.c.o(.rodata);
+        build/us.v10/src/fight/chjinjonatorbase.c.o(.rodata);
+        build/us.v10/src/fight/chspellbarrier.c.o(.rodata);
+        build/us.v10/src/fight/chspellfireball.c.o(.rodata);
+        build/us.v10/src/fight/chgreenblast.c.o(.rodata);
+        build/us.v10/src/fight/chjinjonator.c.o(.rodata);
+        build/us.v10/src/fight/chbossshadow.c.o(.rodata);
         fight_RODATA_END = .;
         fight_RODATA_SIZE = ABSOLUTE(fight_RODATA_END - fight_RODATA_START);
     }
@@ -3276,25 +3270,25 @@ SECTIONS
         CCW_DATA_END = .;
         CCW_DATA_SIZE = ABSOLUTE(CCW_DATA_END - CCW_DATA_START);
         CCW_RODATA_START = .;
-        build/us.v10/src/CCW/code_160.c.o(.rodata*);
-        build/us.v10/src/CCW/code_950.c.o(.rodata*);
-        build/us.v10/src/CCW/code_1B20.c.o(.rodata*);
-        build/us.v10/src/CCW/code_2270.c.o(.rodata*);
-        build/us.v10/src/CCW/code_2B00.c.o(.rodata*);
-        build/us.v10/src/CCW/code_3310.c.o(.rodata*);
-        build/us.v10/src/CCW/code_3DA0.c.o(.rodata*);
-        build/us.v10/src/CCW/code_4530.c.o(.rodata*);
-        build/us.v10/src/CCW/code_4960.c.o(.rodata*);
-        build/us.v10/src/CCW/code_4D00.c.o(.rodata*);
-        build/us.v10/src/CCW/code_50D0.c.o(.rodata*);
-        build/us.v10/src/CCW/code_5540.c.o(.rodata*);
-        build/us.v10/src/CCW/code_5BF0.c.o(.rodata*);
-        build/us.v10/src/CCW/code_61E0.c.o(.rodata*);
-        build/us.v10/src/CCW/code_6620.c.o(.rodata*);
-        build/us.v10/src/CCW/code_6AC0.c.o(.rodata*);
-        build/us.v10/src/CCW/code_76C0.c.o(.rodata*);
-        build/us.v10/src/CCW/code_7BF0.c.o(.rodata*);
-        build/us.v10/src/CCW/ch/grublinhood.c.o(.rodata*);
+        build/us.v10/src/CCW/code_160.c.o(.rodata);
+        build/us.v10/src/CCW/code_950.c.o(.rodata);
+        build/us.v10/src/CCW/code_1B20.c.o(.rodata);
+        build/us.v10/src/CCW/code_2270.c.o(.rodata);
+        build/us.v10/src/CCW/code_2B00.c.o(.rodata);
+        build/us.v10/src/CCW/code_3310.c.o(.rodata);
+        build/us.v10/src/CCW/code_3DA0.c.o(.rodata);
+        build/us.v10/src/CCW/code_4530.c.o(.rodata);
+        build/us.v10/src/CCW/code_4960.c.o(.rodata);
+        build/us.v10/src/CCW/code_4D00.c.o(.rodata);
+        build/us.v10/src/CCW/code_50D0.c.o(.rodata);
+        build/us.v10/src/CCW/code_5540.c.o(.rodata);
+        build/us.v10/src/CCW/code_5BF0.c.o(.rodata);
+        build/us.v10/src/CCW/code_61E0.c.o(.rodata);
+        build/us.v10/src/CCW/code_6620.c.o(.rodata);
+        build/us.v10/src/CCW/code_6AC0.c.o(.rodata);
+        build/us.v10/src/CCW/code_76C0.c.o(.rodata);
+        build/us.v10/src/CCW/code_7BF0.c.o(.rodata);
+        build/us.v10/src/CCW/ch/grublinhood.c.o(.rodata);
         CCW_RODATA_END = .;
         CCW_RODATA_SIZE = ABSOLUTE(CCW_RODATA_END - CCW_RODATA_START);
     }
@@ -3326,7 +3320,7 @@ SECTIONS
         emptyLvl_DATA_END = .;
         emptyLvl_DATA_SIZE = ABSOLUTE(emptyLvl_DATA_END - emptyLvl_DATA_START);
         emptyLvl_RODATA_START = .;
-        build/us.v10/src/emptyLvl/code_0.c.o(.rodata*);
+        build/us.v10/src/emptyLvl/code_0.c.o(.rodata);
         emptyLvl_RODATA_END = .;
         emptyLvl_RODATA_SIZE = ABSOLUTE(emptyLvl_RODATA_END - emptyLvl_RODATA_START);
     }
@@ -3343,7 +3337,13 @@ SECTIONS
     emptyLvl_ROM_END = __romPos;
     emptyLvl_VRAM_END = .;
 
-
-
+.rodata : {
+    *(.rodata)
+    *(.rodata.*)
+}
+    /DISCARD/ :
+    {
+        *(*);
+    }
 
 }
