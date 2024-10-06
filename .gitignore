@@ -5,12 +5,7 @@ baseroms/*
 *.v64
 
 #compiled or ripped asm
-asm/nonmatchings
-asm/*.s
-asm/*/*.s
-asm/core1/os
-!asm/ultra
-!asm/core1/ultra
+
 build/*
 build/
 
@@ -55,7 +50,7 @@ __pycache__/
 expected/
 .*/
 !.gitlab/
-*.ld
+
 *.map
 *auto.txt
 .splat_cache

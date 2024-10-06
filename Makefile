@@ -83,7 +83,7 @@ NEW_BINS := $(filter-out $(ALL_BINS), $(YAML_BINS))
 NEW_FILES := $(NEW_C_SRCS) $(NEW_ASM_SRCS) $(NEW_BINS)
 BOOT_ASM_SRCS := $(filter-out asm/core1/%,$(NEW_ASM_SRCS) $(ALL_ASM_SRCS))
 # Any source files that have GLOBAL_ASM in them or do not exist before splitting
-GLOBAL_ASM_C_SRCS := $(shell $(GREP) GLOBAL_ASM $(SRC_ROOT) </dev/null) $(NEW_C_SRCS)
+GLOBAL_ASM_C_SRCS := $(NEW_C_SRCS)
 
 # Build folders
 C_DIRS         := $(sort $(dir $(C_SRCS) $(NEW_C_SRCS)))
@@ -93,6 +93,7 @@ C_BUILD_DIRS   := $(addprefix $(BUILD_DIR)/,$(C_DIRS))
 ASM_BUILD_DIRS := $(addprefix $(BUILD_DIR)/,$(ASM_DIRS))
 BIN_BUILD_DIRS := $(addprefix $(BUILD_DIR)/,$(BIN_DIRS))
 ALL_DIRS       := $(C_BUILD_DIRS) $(ASM_BUILD_DIRS) $(BIN_BUILD_DIRS) $(BUILD_DIR)
+CUTSCENE_FILES := $(patsubst src/cutscenes/%.c, $(BUILD_DIR)/cutscenes/%.c.o, $(wildcard src/cutscenes/*.c))
 
 # Build files
 BASEROM              := baserom.$(VERSION).z64
@@ -158,16 +159,20 @@ endef
 ### Flags ###
 
 # Build tool flags
-CFLAGS         := -c -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm $(OPT_FLAGS) $(MIPSBIT) -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
-CFLAGS         += -woff 649,654,838,807
+IDO_CFLAGS         := -c -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm $(OPT_FLAGS) -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
+IDO_CFLAGS         += -woff 649,654,838,807
 CPPFLAGS       := -D_FINALROM -DN_MICRO
 INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR
-OPT_FLAGS      := -O2 
-MIPSBIT        := -mips2
+OPT_FLAGS      := -O2
+MIPSBIT        := -mips3
 ASFLAGS        := -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 GCC_ASFLAGS    := -c -x assembler-with-cpp -mabi=32 -ffreestanding -mtune=vr4300 -march=vr4300 -mfix4300 -G 0 -O -mno-shared -fno-PIC -mno-abicalls
-LDFLAGS        := -T $(LD_SCRIPT) -Map $(ELF:.elf=.map) --no-check-sections --accept-unknown-input-arch -T manual_syms.$(VERSION).txt
+LDFLAGS        :=  -T $(LD_SCRIPT)  -Map $(ELF:.elf=.map)  --no-check-section --accept-unknown-input-arch -T manual_syms.$(VERSION).txt -L/banjo/ultralib/libs 
 BINOFLAGS      := -I binary -O elf32-tradbigmips
+GCC_CFLAGS         :=  -G0 -c  -mhard-float -fno-merge-constants  -march=vr4300  -fno-toplevel-reorder -mfix4300 -mabi=32 -mno-abicalls -fno-inline-functions -fno-strict-aliasing -fno-zero-initialized-in-bss -mdivide-breaks -fno-PIC -fno-common -ffreestanding -fno-builtin -funsigned-char -fwrapv -mno-explicit-relocs -mno-split-addresses  -Wall -Wextra   -DMODERN_CC -D_MIPS_SZLONG=32 -D__USE_ISOC99 -DF3DEX_GBI -DBUILD_VERSION=VERSION_L -DBUILD_VERSION_STRING=\"2.0L\" -DNDEBUG -D_FINALROM 
+#GCC_CFLAGS  	   +=  -Wall -Wextra -Wno-format-security -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-builtin-declaration-mismatch -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration  
+#GCC_CFLAGS   	   += -fno-strict-aliasing -Os -ggdb3 -ffast-math -fno-unsafe-math-optimizations -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
+#GCC_2_CFLAGS         := -c $(MIPSBIT) -mhard-float -mdivide-breaks -fno-strict-aliasing -fno-inline-functions -mabi=32 -fno-common -fno-zero-initialized-in-bss -ffreestanding  -G 0 -O -mno-shared -fno-PIC -mno-abicalls -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
 
 ### Rules ###
 
@@ -231,7 +236,7 @@ $(ALL_DIRS) :
 # .s -> .o (assemble with gcc for preprocessor support)
 $(BUILD_DIR)/%.s.o: %.s | $(ASM_BUILD_DIRS)
 	$(call print2,Assembling:,$<,$@)
-	@$(GCC) $(GCC_ASFLAGS) $(INCLUDE_CFLAGS) -o $@ $<
+	@$(GCC) $(GCC_ASFLAGS) $(INCLUDE_CFLAGS) -mips3 -o $@ $<
 
 # .s -> .o (boot)
 $(BOOT_ASM_OBJS) : $(BUILD_DIR)/%.s.o : %.s | $(ASM_BUILD_DIRS)
@@ -243,30 +248,43 @@ $(BOOT_ASM_OBJS) : $(BUILD_DIR)/%.s.o : %.s | $(ASM_BUILD_DIRS)
 $(BIN_OBJS) : $(BUILD_DIR)/%.bin.o : %.bin | $(BIN_BUILD_DIRS)
 	$(call print2,Objcopying:,$<,$@)
 	@$(OBJCOPY) $(BINOFLAGS) $< $@
+# Rule for src/core1
+$(BUILD_DIR)/src/core1/%.c.o : src/core1/%.c | $(C_BUILD_DIRS)
+	$(call print2,Compiling src/core1 with GCC:,$<,$@)
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
 
-# .c -> .o
+$(BUILD_DIR)/src/core2/%.c.o : src/core2/%.c | $(C_BUILD_DIRS)
+	$(call print2,Compiling src/core2 with GCC:,$<,$@)
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
+
 $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling:,$<,$@)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
+#	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
+	
 
 # .c -> .o (mips3)
 $(MIPS3_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling:,$<,$@)
-	@$(CC) -c -32 $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $<
-	@tools/set_o32abi_bit.py $@
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS)    -mips3  -o $@ $<
+
+	
+build/$(VERSION)/src/gcc_fix/gcc_fix.c.o : $(BUILD_DIR)/%.c.o : %.c |  $(C_BUILD_DIRS)
+	$(call print2,Compiling:,$<,$@)
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
 
 # .c -> .o with asm processor
 $(GLOBAL_ASM_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling (with ASM Processor):,$<,$@)
 	@$(ASM_PROCESSOR) $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
-	@$(CC) -32 $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $(BUILD_DIR)/$<
 	@$(ASM_PROCESSOR) $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude include/prelude.s
 
 # .c -> .o (boot)
 $(BOOT_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling:,$<,$@)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
 	mips-linux-gnu-strip $@ -N asdasdasasdasd
 	$(OBJCOPY) --prefix-symbols=boot_ $@
 	$(OBJCOPY) --strip-unneeded $@
@@ -274,8 +292,7 @@ $(BOOT_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 # .c -> .o (mips3, boot)
 $(BOOT_MIPS3_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling:,$<,$@)
-	@$(CC) -c -32 $(CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $<
-	@tools/set_o32abi_bit.py $@
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS)  -mips3  -o $@ $<
 	$(OBJCOPY) --prefix-symbols=boot_ $@
 	$(OBJCOPY) --strip-unneeded $@
 
@@ -284,7 +301,7 @@ $(BUILD_DIR)/SPLAT_TIMESTAMP: decompressed.$(VERSION).yaml $(SYMBOL_ADDRS) $(DEC
 	$(call print1,Splitting rom:,$<)
 	@$(SPLAT) decompressed.$(VERSION).yaml
 	@touch $@
-	@touch $(LD_SCRIPT)
+
 
 # Dummy target to make the LD script and overlay rzips depend on splat being run
 #   without causing it to be rerun once for every overlay
@@ -371,57 +388,15 @@ clean:
 	@$(RM) -rf $(DECOMPRESSED_BASEROM)
 	@$(RM) -rf $(BIN_ROOT)
 	@$(RM) -rf $(NONMATCHING_DIR)
-	@$(RM) -rf $(ASM_ROOT)/*.s
-	@$(RM) -rf $(addprefix $(ASM_ROOT)/,$(filter-out core1,$(OVERLAYS)))
-	@$(RM) -rf $(ASM_ROOT)/core1/*.s
-	@$(RM) -rf $(ASM_ROOT)/core1/os
-	@$(RM) -f *.ld
 
-# Per-file flag definitions
-build/$(VERSION)/src/core1/io/%.c.o: OPT_FLAGS = -O1
-build/$(VERSION)/src/core1/os/%.c.o: OPT_FLAGS = -O1
-build/$(VERSION)/src/core1/gu/%.c.o: OPT_FLAGS = -O3
-build/$(VERSION)/src/core1/gu/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
-build/$(VERSION)/src/core1/audio/%.c.o: OPT_FLAGS = -O3
-build/$(VERSION)/src/core1/audio/%.c.o: INCLUDE_CFLAGS = -I . -I include -I include/2.0L -I include/2.0L/PR
-build/$(VERSION)/src/core1/ll.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/core1/ll.c.o: MIPSBIT := -mips3 -o32
-build/$(VERSION)/src/core1/ll_cvt.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/core1/ll_cvt.c.o: MIPSBIT := -mips3 -o32
 
-build/$(VERSION)/src/bk_boot_27F0.c.o: OPT_FLAGS = -O2
-build/$(VERSION)/src/done/destroythread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pirawdma.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/thread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pimgr.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/getthreadid.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/setthreadpri.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/createthread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/yieldthread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/setglobalintmask.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/recvmesg.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/startthread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/devmgr.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/sendmesg.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pigetstat.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/si.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/resetglobalintmask.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/epirawwrite.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/epirawread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/createmesgqueue.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/leodiskinit.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/virtualtophysical.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/ll.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/ll.c.o: MIPSBIT := -mips3 -o32
-build/$(VERSION)/src/done/sirawwrite.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/sirawread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/initialize.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/pirawread.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/seteventmesg.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/siacs.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/cartrominit.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/leointerrupt.c.o: OPT_FLAGS := -O1
-build/$(VERSION)/src/done/epirawdma.c.o: OPT_FLAGS := -O1
+
+
+
+#build/$(VERSION)/src/core1/code_0.c.o: GCC_CFLAGS += -fno-toplevel-reorder
+#build/$(VERSION)/src/core1/code_1D00.c.o: GCC_CFLAGS += -fno-toplevel-reorder
+#build/$(VERSION)/src/core1/code_10A00.c.o:GCC_CFLAGS  +=  -fno-toplevel-reorder
+
 
 # Disable implicit rules
 MAKEFLAGS += -r

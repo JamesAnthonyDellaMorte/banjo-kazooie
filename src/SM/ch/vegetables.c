@@ -137,7 +137,8 @@ struct43s D_8038AF0C ={
 
 /* .code */
 void func_80387910(ParticleEmitter *arg0, f32 *arg1, s32 arg2){
-    s32 sp24[3] = D_8038ADA0;
+s32 sp24[3];
+memcpy(sp24, D_8038ADA0, sizeof(sp24));
     particleEmitter_setRGB(arg0, sp24);
     particleEmitter_setSprite(arg0, ASSET_700_SPRITE_DUST);
     particleEmitter_setStartingFrameRange(arg0, 0, 7);

@@ -7,7 +7,7 @@
 void  func_802444C0(N_AL_Struct81s *arg0);
 void  func_80244050(ALEventQueue *arg0, N_AL_Struct81s *arg1, u16 arg2);
 
-void  func_8024324C(N_ALSndPlayer *arg0);
+ALMicroTime  func_8024324C(N_ALSndPlayer *arg0);
 void  func_802432F8(N_ALSndPlayer *sndp, N_ALEvent *event);
 void  func_80243F84(N_AL_Struct81s *arg0);
 void  func_80243FE4(N_AL_Struct81s *arg0);
@@ -66,7 +66,7 @@ void func_80243070(Struct87s *arg0) {
     D_802758CC->nextDelta = alEvtqNextEvent(&D_802758CC->evtq, &D_802758CC->nextEvent);
 }
 
-void func_8024324C(N_ALSndPlayer *arg0)
+ALMicroTime  func_8024324C(N_ALSndPlayer *arg0)
 {
   N_ALSndPlayer *new_var = (N_ALSndPlayer *)arg0;
   N_ALEvent2 sp3C;

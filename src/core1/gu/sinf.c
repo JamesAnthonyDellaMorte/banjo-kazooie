@@ -30,8 +30,6 @@
  * ====================================================================
  */
 
-#pragma weak fsin = __sinf
-#pragma weak sinf = __sinf
 #define	fsin __sinf
 
 /* coefficients for polynomial approximation of sin on +/- pi/2 */
