@@ -10,7 +10,8 @@
 #define MERGE(a, b) a ## b
 
 #define UNK_TYPE(t) t
-
+struct struct_68_s;
+struct actor_s;
 
 typedef struct{
     f32 x;

@@ -24,7 +24,7 @@
 #include "enums.h"
 
 extern f32 fabsf(f32);
-#pragma intrinsic (fabsf)
+
 
 //known it uses "+" instead of "|" for fight/code_9D40.c, func_8039049C, case 6
 #define FUNC_8030E624(sfx_e, vol, sample_rate) func_8030E624(\

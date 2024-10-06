@@ -3342,6 +3342,19 @@ SECTIONS
     *(.rodata)
     *(.rodata.*)
 }
+.data : {
+    *(.data)
+    *(.data.*)
+}
+.bss : {
+    *(.bss)
+    *(.bss.*)
+}
+.text : {
+    *(.text)
+    *(.text.*)
+}
+
     /DISCARD/ :
     {
         *(*);

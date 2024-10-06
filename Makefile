@@ -163,13 +163,13 @@ IDO_CFLAGS         := -c -Wab,-r4300_mul -non_shared -G 0 -Xcpluscomm $(OPT_FLAG
 IDO_CFLAGS         += -woff 649,654,838,807
 CPPFLAGS       := -D_FINALROM -DN_MICRO
 INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR
-OPT_FLAGS      := -O2
+OPT_FLAGS      := -O3
 MIPSBIT        := -mips3
 ASFLAGS        := -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 GCC_ASFLAGS    := -c -x assembler-with-cpp -mabi=32 -ffreestanding -mtune=vr4300 -march=vr4300 -mfix4300 -G 0 -O -mno-shared -fno-PIC -mno-abicalls
 LDFLAGS        :=  -T $(LD_SCRIPT)  -Map $(ELF:.elf=.map)  --no-check-section --accept-unknown-input-arch -T manual_syms.$(VERSION).txt -L/banjo/ultralib/libs 
 BINOFLAGS      := -I binary -O elf32-tradbigmips
-GCC_CFLAGS         :=  -G0 -c  -mhard-float -fno-merge-constants  -march=vr4300  -fno-toplevel-reorder -mfix4300 -mabi=32 -mno-abicalls -fno-inline-functions -fno-strict-aliasing -fno-zero-initialized-in-bss -mdivide-breaks -fno-PIC -fno-common -ffreestanding -fno-builtin -funsigned-char -fwrapv -mno-explicit-relocs -mno-split-addresses  -Wall -Wextra   -DMODERN_CC -D_MIPS_SZLONG=32 -D__USE_ISOC99 -DF3DEX_GBI -DBUILD_VERSION=VERSION_L -DBUILD_VERSION_STRING=\"2.0L\" -DNDEBUG -D_FINALROM 
+GCC_CFLAGS         :=  -G0 -c  -mhard-float -fno-merge-constants  -march=vr4300  -fno-toplevel-reorder -mfix4300 -mabi=32 -mno-abicalls -fno-inline-functions -fno-strict-aliasing -fno-zero-initialized-in-bss -ffast-math -fno-unsafe-math-optimizations -mdivide-breaks -fno-PIC -fno-common -ffreestanding -fno-builtin -funsigned-char -fwrapv -mno-explicit-relocs -mno-split-addresses  -Wall -Wextra   -DMODERN_CC -D_MIPS_SZLONG=32 -D__USE_ISOC99 -DF3DEX_GBI -DBUILD_VERSION=VERSION_L -DBUILD_VERSION_STRING=\"2.0L\" -DNDEBUG -D_FINALROM 
 #GCC_CFLAGS  	   +=  -Wall -Wextra -Wno-format-security -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-builtin-declaration-mismatch -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration  
 #GCC_CFLAGS   	   += -fno-strict-aliasing -Os -ggdb3 -ffast-math -fno-unsafe-math-optimizations -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
 #GCC_2_CFLAGS         := -c $(MIPSBIT) -mhard-float -mdivide-breaks -fno-strict-aliasing -fno-inline-functions -mabi=32 -fno-common -fno-zero-initialized-in-bss -ffreestanding  -G 0 -O -mno-shared -fno-PIC -mno-abicalls -D_FINALROM -DF3DEX_GBI -DVERSION='$(C_VERSION)'
@@ -251,17 +251,20 @@ $(BIN_OBJS) : $(BUILD_DIR)/%.bin.o : %.bin | $(BIN_BUILD_DIRS)
 # Rule for src/core1
 $(BUILD_DIR)/src/core1/%.c.o : src/core1/%.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling src/core1 with GCC:,$<,$@)
-	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) -O3 -mips3 -o $@ $<
 
 $(BUILD_DIR)/src/core2/%.c.o : src/core2/%.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling src/core2 with GCC:,$<,$@)
-	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) -O2 -mips3 -o $@ $<
 
 $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling:,$<,$@)
 #	@$(CC)  $(IDO_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
-	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $<
-	
+	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) -O3 -mips3 -o $@ $<
+##########
+
+
+
 
 # .c -> .o (mips3)
 $(MIPS3_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
@@ -276,10 +279,8 @@ build/$(VERSION)/src/gcc_fix/gcc_fix.c.o : $(BUILD_DIR)/%.c.o : %.c |  $(C_BUILD
 # .c -> .o with asm processor
 $(GLOBAL_ASM_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)
 	$(call print2,Compiling (with ASM Processor):,$<,$@)
-	@$(ASM_PROCESSOR) $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
 	@$(GCC) $(GCC_CFLAGS) $(CPPFLAGS) $(INCLUDE_CFLAGS) $(OPT_FLAGS) -mips3 -o $@ $(BUILD_DIR)/$<
-	@$(ASM_PROCESSOR) $(OPT_FLAGS) $< --post-process $@ \
-		--assembler "$(AS) $(ASFLAGS)" --asm-prelude include/prelude.s
+
 
 # .c -> .o (boot)
 $(BOOT_C_OBJS) : $(BUILD_DIR)/%.c.o : %.c | $(C_BUILD_DIRS)

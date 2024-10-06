@@ -8,14 +8,14 @@
  * An index used to track the position in the outgoing payload
  * it should write the next key to.
  */
-s32 snsPayloadOutCurrPos = 0;
+volatile  snsPayloadOutCurrPos = 0;
 
 /*.bss*/
 /**
  * An index used to track the position in the incoming payload
  * we should read the next key from.
  */
-s32 snsPayloadInCurrPos;
+volatile s32 snsPayloadInCurrPos;
 
 
 struct SnsPayload *snspayload_init_new_payload(struct SnsPayload *payload)
