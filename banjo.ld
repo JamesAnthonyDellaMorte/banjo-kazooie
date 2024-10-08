@@ -1547,6 +1547,7 @@ SECTIONS
         core2_DATA_END = .;
         core2_DATA_SIZE = ABSOLUTE(core2_DATA_END - core2_DATA_START);
         core2_RODATA_START = .;
+        build/us.v10/src/core2/ba/flap.c.o(.rodata);
         build/us.v10/src/core2/animctrl.c.o(.rodata);
         build/us.v10/src/core2/anim/sprite.c.o(.rodata);
         build/us.v10/src/core2/code_1930.c.o(.rodata);
@@ -2179,6 +2180,10 @@ SECTIONS
         build/us.v10/src/CC/ch/tooth.c.o(.rodata);
         build/us.v10/src/CC/code_1B90.c.o(.rodata);
         build/us.v10/src/CC/code_1F70.c.o(.rodata);
+         build/us.v10/src/CC/code_BF0.c.o(.rodata);
+          build/us.v10/src/CC/code_13C0.c.o(.rodata);
+           build/us.v10/src/CC/ch/sawblade.c.o(.rodata);
+            build/us.v10/src/CC/code_3400.c.o(.rodata);
         CC_RODATA_END = .;
         CC_RODATA_SIZE = ABSOLUTE(CC_RODATA_END - CC_RODATA_START);
     }
@@ -2300,7 +2305,18 @@ SECTIONS
         GV_DATA_END = .;
         GV_DATA_SIZE = ABSOLUTE(GV_DATA_END - GV_DATA_START);
         GV_RODATA_START = .;
+        build/us.v10/src/GV/code_9C10.c.o(.rodata);
         build/us.v10/src/GV/ch/ancientone.c.o(.rodata);
+         build/us.v10/src/GV/code_9B70.c.o(.rodata);
+         build/us.v10/src/GV/code_2EE0.c.o(.rodata);
+         build/us.v10/src/GV/ch/trunker.c.o(.rodata);
+         build/us.v10/src/GV/ch/gobirope.c.o(.rodata);
+         build/us.v10/src/GV/ch/toots.c.o(.rodata);
+         build/us.v10/src/GV/code_7DB0.c.o(.rodata);
+         build/us.v10/src/GV/code_61E0.c.o(.rodata);
+        build/us.v10/src/GV/code_3B10.c.o(.rodata);
+        build/us.v10/src/GV/code_3630.c.o(.rodata);
+         build/us.v10/src/GV/code_2EE0.c.o(.rodata);
         build/us.v10/src/GV/ch/gobi1.c.o(.rodata);
         build/us.v10/src/GV/ch/gobi2.c.o(.rodata);
         build/us.v10/src/GV/ch/gobi3.c.o(.rodata);
@@ -2394,6 +2410,8 @@ SECTIONS
         MMM_DATA_END = .;
         MMM_DATA_SIZE = ABSOLUTE(MMM_DATA_END - MMM_DATA_START);
         MMM_RODATA_START = .;
+        build/us.v10/src/MMM/code_2F60.c.o(.rodata);
+         build/us.v10/src/MMM/code_DC0.c.o(.rodata);
         build/us.v10/src/MMM/ch/loggo.c.o(.rodata);
         build/us.v10/src/MMM/ch/napper.c.o(.rodata);
         build/us.v10/src/MMM/ch/motzhand.c.o(.rodata);
@@ -2534,6 +2552,7 @@ SECTIONS
         MM_DATA_END = .;
         MM_DATA_SIZE = ABSOLUTE(MM_DATA_END - MM_DATA_START);
         MM_RODATA_START = .;
+         build/us.v10/src/MM/ch/chimpystump.c.o(.rodata);
         build/us.v10/src/MM/ch/orangepad.c.o(.rodata);
         build/us.v10/src/MM/ch/hut.c.o(.rodata);
         build/us.v10/src/MM/ch/conga.c.o(.rodata);
@@ -2621,6 +2640,7 @@ SECTIONS
         BGS_DATA_END = .;
         BGS_DATA_SIZE = ABSOLUTE(BGS_DATA_END - BGS_DATA_START);
         BGS_RODATA_START = .;
+        
         build/us.v10/src/BGS/ch/flibbit.c.o(.rodata);
         build/us.v10/src/BGS/ch/croctus.c.o(.rodata);
         build/us.v10/src/BGS/ch/code_2270.c.o(.rodata);
@@ -2746,6 +2766,16 @@ SECTIONS
         RBB_DATA_SIZE = ABSOLUTE(RBB_DATA_END - RBB_DATA_START);
         RBB_RODATA_START = .;
         build/us.v10/src/RBB/code_640.c.o(.rodata);
+        build/us.v10/src/RBB/propellorctrl.c.o(.rodata);
+         build/us.v10/src/RBB/ch/rarewareflag.c.o(.rodata);
+         build/us.v10/src/RBB/code_9840.c.o(.rodata);
+        build/us.v10/src/RBB/ch/anchorswitch.c.o(.rodata);
+         build/us.v10/src/RBB/ch/whistleswitch.c.o(.rodata);
+         build/us.v10/src/RBB/ch/cog.c.o(.rodata);
+        build/us.v10/src/RBB/ch/eggtoll1.c.o(.rodata);
+        build/us.v10/src/RBB/ch/engineparts.c.o(.rodata);
+        build/us.v10/src/RBB/ch/enginefan.c.o(.rodata);
+        build/us.v10/src/RBB/code_9840.c.o(.rodata);
         build/us.v10/src/RBB/code_CA0.c.o(.rodata);
         build/us.v10/src/RBB/code_1570.c.o(.rodata);
         build/us.v10/src/RBB/ch/grimlet.c.o(.rodata);
@@ -2875,6 +2905,14 @@ SECTIONS
         FP_DATA_SIZE = ABSOLUTE(FP_DATA_END - FP_DATA_START);
         FP_RODATA_START = .;
         build/us.v10/src/FP/ch/scarfsled.c.o(.rodata);
+         build/us.v10/src/FP/code_ABD0.c.o(.rodata);
+         build/us.v10/src/FP/ch/cavewozza.c.o(.rodata); 
+         build/us.v10/src/FP/ch/snowmanbutton.c.o(.rodata);
+         build/us.v10/src/FP/ch/racesled.c.o(.rodata);
+         build/us.v10/src/FP/ch/xmastreeswitch.c.o(.rodata);
+          build/us.v10/src/FP/ch/xmastreeswitch.c.o(.rodata);
+         build/us.v10/src/FP/code_B4D0.c.o(.rodata);
+         build/us.v10/src/FP/ch/boggy3.c.o(.rodata);
         build/us.v10/src/FP/ch/xmastree.c.o(.rodata);
         build/us.v10/src/FP/ch/boggy1.c.o(.rodata);
         build/us.v10/src/FP/code_19E0.c.o(.rodata);
@@ -2960,6 +2998,8 @@ SECTIONS
         build/us.v10/src/SM/ch/vegetables.c.o(.rodata);
         build/us.v10/src/SM/code_2990.c.o(.rodata);
         build/us.v10/src/SM/code_44D0.c.o(.rodata);
+        build/us.v10/src/SM/code_2900.c.o(.rodata);
+         build/us.v10/src/SM/code_0.c.o(.rodata);
         SM_RODATA_END = .;
         SM_RODATA_SIZE = ABSOLUTE(SM_RODATA_END - SM_RODATA_START);
     }
@@ -3078,6 +3118,7 @@ SECTIONS
         build/us.v10/src/lair/code_0.c.o(.rodata);
         build/us.v10/src/lair/ch/cauldron.c.o(.rodata);
         build/us.v10/src/lair/ch/brentilda.c.o(.rodata);
+         build/us.v10/src/lair/code_A170.c.o(.rodata);
         build/us.v10/src/lair/code_5ED0.c.o(.rodata);
         build/us.v10/src/lair/code_86F0.c.o(.rodata);
         build/us.v10/src/lair/code_9C40.c.o(.rodata);
@@ -3087,6 +3128,9 @@ SECTIONS
         build/us.v10/src/lair/code_BBD0.c.o(.rodata);
         build/us.v10/src/lair/code_C1C0.c.o(.rodata);
         build/us.v10/src/lair/code_C6C0.c.o(.rodata);
+         build/us.v10/src/lair/code_A430.c.o(.rodata);
+         build/us.v10/src/lair/code_A430.c.o(.rodata);
+        build/us.v10/src/lair/code_A170.c.o(.rodata);
         lair_RODATA_END = .;
         lair_RODATA_SIZE = ABSOLUTE(lair_RODATA_END - lair_RODATA_START);
     }
@@ -3110,7 +3154,7 @@ SECTIONS
     .fight core2_VRAM_END : AT(fight_ROM_START) SUBALIGN(16)
     {
         fight_TEXT_START = .;
-        build/us.v10/src/fight/code_0.c.o(.text);
+        build/us.v10/src/fight/fight.c.o(.text);
         build/us.v10/src/fight/chfinalboss.c.o(.text);
         build/us.v10/src/fight/chbossjinjo.c.o(.text);
         build/us.v10/src/fight/chbossjinjobase.c.o(.text);
@@ -3164,7 +3208,7 @@ SECTIONS
     .fight_bss (NOLOAD) : SUBALIGN(16)
     {
         fight_BSS_START = .;
-        build/us.v10/src/fight/code_0.c.o(.bss);
+        build/us.v10/src/fight/fight.c.o(.bss);
         build/us.v10/src/fight/chfinalboss.c.o(.bss);
         build/us.v10/src/fight/chspellfireball.c.o(.bss);
         build/us.v10/src/fight/chjinjonator.c.o(.bss);
@@ -3271,6 +3315,14 @@ SECTIONS
         CCW_DATA_END = .;
         CCW_DATA_SIZE = ABSOLUTE(CCW_DATA_END - CCW_DATA_START);
         CCW_RODATA_START = .;
+        build/us.v10/src/CCW/code_7570.c.o(.rodata);
+        build/us.v10/src/CCW/code_7120.c.o(.rodata);
+         build/us.v10/src/CCW/code_6EC0.c.o(.rodata);
+          build/us.v10/src/CCW/code_3050.c.o(.rodata);
+           build/us.v10/src/CCW/code_3050.c.o(.rodata);
+            build/us.v10/src/CCW/code_21A0.c.o(.rodata);
+             build/us.v10/src/CCW/code_14B0.c.o(.rodata);
+              build/us.v10/src/CCW/code_0.c.o(.rodata);
         build/us.v10/src/CCW/code_160.c.o(.rodata);
         build/us.v10/src/CCW/code_950.c.o(.rodata);
         build/us.v10/src/CCW/code_1B20.c.o(.rodata);
@@ -3337,23 +3389,6 @@ SECTIONS
     __romPos = ALIGN(__romPos, 16);
     emptyLvl_ROM_END = __romPos;
     emptyLvl_VRAM_END = .;
-
-.rodata : {
-    *(.rodata)
-    *(.rodata.*)
-}
-.data : {
-    *(.data)
-    *(.data.*)
-}
-.bss : {
-    *(.bss)
-    *(.bss.*)
-}
-.text : {
-    *(.text)
-    *(.text.*)
-}
 
     /DISCARD/ :
     {

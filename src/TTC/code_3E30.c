@@ -147,7 +147,7 @@ void func_8038A328(void) {
         i_ptr->unk3 = 2;
         i_ptr->unk4 = 0.0f;
     }
-    mapSpecificFlags_set(1, FALSE);
+    mapSpecificFlags_set(TTC_SPECIFIC_FLAG_1_UNKNOWN, FALSE);
 }
 
 void func_8038A37C(s32 arg0, BKVtxRef *ref, Vtx *dst, s32 arg3) {
@@ -318,8 +318,8 @@ void func_8038AC48(LetterFloorTile *arg0) {
                             if (var_v0 & 1) {
                                 D_8038D720.unk8 = 2U;
                                 D_8038D720.unkC = 0.0f;
-                                mapSpecificFlags_set(1, TRUE);
-                                fileProgressFlag_set(0xFA, TRUE);
+                                mapSpecificFlags_set(TTC_SPECIFIC_FLAG_1_UNKNOWN, TRUE);
+                                fileProgressFlag_set(FILEPROG_FA_UNKNOWN, TRUE);
                                 func_8030E2C4(D_8038D720.sfxsourceIdx);
                                 func_8038A258(2);
                             } else if (var_v0 & 0xE) {
@@ -387,7 +387,7 @@ void func_8038B094(void){
     void *sp28;
 
     if( map_get() == MAP_7_TTC_TREASURE_TROVE_COVE
-        && levelSpecificFlags_get(0x2)
+        && levelSpecificFlags_get(LEVEL_FLAG_2_TTC_UNKNOWN)
     ){
         sp2C = func_8034C5AC(0x12C);
         if(sp2C){
@@ -401,7 +401,8 @@ void func_8038B094(void){
     else{
         sp2C = func_8034C5AC(0x131);
         sp28 = func_8034C5AC(0x12C);
-        if(levelSpecificFlags_get(5)){
+
+        if (levelSpecificFlags_get(LEVEL_FLAG_5_TTC_UNKNOWN)) {
             func_8034E71C(sp2C, -500, 10.0f);
             func_80324E38(0.0f, 3);
             timed_setStaticCameraToNode(0.0f, 1);
@@ -410,10 +411,10 @@ void func_8038B094(void){
             func_803228D8();
             timedFunc_set_3(2.0f, (GenFunction_3) func_802E4078, MAP_7_TTC_TREASURE_TROVE_COVE, 1, 0);
         }
-        else if(levelSpecificFlags_get(2) || volatileFlag_get(VOLATILE_FLAG_2_FF_IN_MINIGAME)){
+        else if (levelSpecificFlags_get(LEVEL_FLAG_2_TTC_UNKNOWN) || volatileFlag_get(VOLATILE_FLAG_2_FF_IN_MINIGAME)) {
             func_8034E71C(sp2C, -500, 0.0f);
         }
-        else{
+        else {
             func_8034E71C(sp28, -500, 0.0f);
         }//L8038B1EC
 
@@ -474,7 +475,7 @@ void func_8038B2F0(void) {
             }
         }
         if ((D_8038D720.unk8 == 0) || (D_8038D720.unk8 == 3)) {
-            if( (levelSpecificFlags_get(2) || volatileFlag_get(VOLATILE_FLAG_3)) 
+            if( (levelSpecificFlags_get(LEVEL_FLAG_2_TTC_UNKNOWN) || volatileFlag_get(VOLATILE_FLAG_3))
                 && (player_getActiveHitbox(0) == HITBOX_1_BEAK_BUSTER) 
                 && func_8028F20C()
             ) {
@@ -612,11 +613,11 @@ u32 func_8038B600(void) {
     return var_a3;
 }
 
-void TTC_func_8038B6D4(s32 arg0, s32 secretCodeIndex, s32 arg2, enum file_progress_e prog_id, s32 prog_val, s32 prog_bit_size, enum file_progress_e arg6){
+void TTC_func_8038B6D4(s32 arg0, s32 secretCodeIndex, s32 arg2, enum file_progress_e progress_flag, s32 prog_val, s32 prog_bit_size, enum file_progress_e arg6){
     if( ((arg2 + 20 == secretCodesTable[secretCodeIndex].id) && volatileFlag_get(arg2))
         || arg0 == 3
     ){
-        fileProgressFlag_setN(prog_id, prog_val, prog_bit_size);
+        fileProgressFlag_setN(progress_flag, prog_val, prog_bit_size);
         if(arg6){
             fileProgressFlag_set(arg6, TRUE);
         }

@@ -11,7 +11,7 @@ void func_8038A8F8(Actor *this);
 
 /* .data */
 ActorInfo D_8038B0E0 = { 0x1F0, 0x3BD, 0, 0, NULL,
-    func_8038A8F8, func_80326224, func_80325340,
+    func_8038A8F8, actor_update_func_80326224, func_80325340,
     0, 0, 0.0f, 0
 };
 
@@ -28,7 +28,7 @@ void func_8038A8F8(Actor *this){
     NodeProp *other;
     
     if(!this->volatile_initialized){
-        other = func_80304C38(0x3be, this);
+        other = nodeprop_findByActorIdAndActorPosition(0x3be, this);
         if(!other){
             this->unk1C_x = this->position_x;
             this->unk1C_y = this->position_y;

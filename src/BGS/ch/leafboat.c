@@ -89,7 +89,7 @@ memcpy(tmp, D_80390DA0, sizeof(tmp));
     switch(this->state){
         case 1:
             if(this->marker->unk2C_2)
-                func_80326224(this);
+                actor_update_func_80326224(this);
             this->marker->propPtr->unk8_3 = 1;
             this->unk1C[0] = 1.0f;
             this->alpha_124_19 = 0xff;
@@ -100,7 +100,7 @@ memcpy(tmp, D_80390DA0, sizeof(tmp));
 
         case 2:
             if(this->marker->unk2C_2)
-                func_80326224(this);
+                actor_update_func_80326224(this);
                 
             this->marker->propPtr->unk8_3 = 1;
             this->unk1C[0] = 1.0f;
@@ -119,7 +119,7 @@ memcpy(tmp, D_80390DA0, sizeof(tmp));
             break;
         case 3:
             if (this->marker->unk2C_2) {
-                func_80326224(this);
+                actor_update_func_80326224(this);
             }
             this->marker->propPtr->unk8_3 = FALSE;
             this->unk1C[0] = 0.0f;

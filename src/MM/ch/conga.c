@@ -46,7 +46,7 @@ ActorAnimationInfo chCongaAnimations[9] = {
 
 ActorInfo chcongaInfo = { MARKER_7_CONGA, ACTOR_8_CONGA, ASSET_35C_MODEL_CONGA,
     1, chCongaAnimations,
-    func_803876D0, func_80326224, actor_draw,
+    func_803876D0, actor_update_func_80326224, actor_draw,
     0, 0x333, 0.0f, 0
 };
 
@@ -221,7 +221,7 @@ void func_803876D0(Actor *this){
         this->initialized = TRUE;
         this->velocity_x = 0.0f;
         this->actor_specific_1_f = 0.0f;
-        node_prop = func_80304C38(0x150, this);
+        node_prop = nodeprop_findByActorIdAndActorPosition(0x150, this);
         ((ActorLocal_Conga *)&this->local)->unk1C = nodeprop_getRadius(node_prop);
         nodeprop_getPosition_s32(node_prop, &((ActorLocal_Conga *)&this->local)->unk10);
     }

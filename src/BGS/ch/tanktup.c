@@ -29,7 +29,7 @@ ActorAnimationInfo BGS_D_80390C20[] = {
 };
 
 ActorInfo D_80390C40 = {MARKER_6C_TANKTUP, ACTOR_E8_TANKTUP, ASSET_3EE_TANKTUP, 0x01, BGS_D_80390C20,
-    func_8038F6A4, func_80326224, actor_draw,
+    func_8038F6A4, actor_update_func_80326224, actor_draw,
     0, 0x80, 0.0f, 0
 };
 
@@ -100,7 +100,7 @@ void func_8038F6A4(Actor *this)
   NodeProp *temp_v0;
   if (!this->initialized)
   {
-    temp_v0 = func_80304C38(ACTOR_32B_UNKNOWN, this);
+    temp_v0 = nodeprop_findByActorIdAndActorPosition(ACTOR_32B_UNKNOWN, this);
     if (temp_v0 == 0)
     {
       local->unk18[0] = 3672.0f;
